@@ -260,6 +260,60 @@ main {
     color: var(--color-muted);
 }
 
+.form__status {
+    grid-column: 1 / -1;
+    display: none;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: -0.25rem;
+    padding: 0.9rem 1rem;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: inset 0 0 0 1px rgba(29, 71, 85, 0.1);
+    color: var(--color-muted);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.form__status::before {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.form__status--visible {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form__status--success {
+    background: rgba(140, 199, 195, 0.22);
+    color: var(--color-primary);
+    box-shadow: inset 0 0 0 1px rgba(140, 199, 195, 0.4);
+}
+
+.form__status--success::before {
+    content: '✔';
+    color: var(--color-secondary);
+}
+
+.form__status--error {
+    background: rgba(29, 71, 85, 0.12);
+    color: var(--color-secondary);
+    box-shadow: inset 0 0 0 1px rgba(29, 71, 85, 0.25);
+}
+
+.form__status--error::before {
+    content: '⚠';
+    color: var(--color-secondary);
+}
+
 .button {
     display: inline-flex;
     align-items: center;

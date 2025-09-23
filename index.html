@@ -78,6 +78,7 @@
                     </div>
                     <p class="form__help">Respondemos dentro de las próximas 24 horas hábiles.</p>
                     <button type="submit" class="button">Enviar consulta</button>
+                    <p class="form__status" role="status" aria-live="polite" aria-atomic="true" aria-hidden="true"></p>
                 </form>
             </div>
         </section>
@@ -143,6 +144,9 @@
         const chatbotInput = document.querySelector('.chatbot__input');
         const chatbotMessages = document.querySelector('.chatbot__messages');
         const suggestionButtons = document.querySelectorAll('.chatbot__suggestion');
+        const contactForm = document.querySelector('.contact__form');
+        const formStatus = contactForm ? contactForm.querySelector('.form__status') : null;
+        const contactSubmitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 
         const knowledgeBase = [
             {
@@ -276,6 +280,129 @@
                 toggleChat(false);
             }
         });
+
+        if (contactForm && formStatus) {
+            const statusClasses = ['form__status--success', 'form__status--error', 'form__status--visible'];
+
+            const updateFormStatus = (message = '', type) => {
+                formStatus.textContent = message;
+                formStatus.classList.remove(...statusClasses);
+
+                if (message) {
+                    formStatus.classList.add('form__status--visible');
+
+                    if (type) {
+                        formStatus.classList.add(`form__status--${type}`);
+                    }
+
+                    formStatus.setAttribute('aria-hidden', 'false');
+                } else {
+                    formStatus.setAttribute('aria-hidden', 'true');
+                }
+            };
+
+            const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+            contactForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                updateFormStatus('', null);
+
+                const formData = new FormData(contactForm);
+                const nombre = (formData.get('nombre') || '').toString().trim();
+                const email = (formData.get('email') || '').toString().trim();
+                const mensaje = (formData.get('mensaje') || '').toString().trim();
+
+                const validationErrors = [];
+                const isEmailValid = email && validateEmail(email);
+
+                if (!nombre) {
+                    validationErrors.push('Ingresá tu nombre completo.');
+                }
+
+                if (!email) {
+                    validationErrors.push('Ingresá un correo electrónico de contacto.');
+                } else if (!isEmailValid) {
+                    validationErrors.push('Revisá que el correo electrónico tenga un formato válido.');
+                }
+
+                if (!mensaje) {
+                    validationErrors.push('Contanos brevemente tu consulta para poder ayudarte.');
+                }
+
+                if (validationErrors.length > 0) {
+                    updateFormStatus(validationErrors.join(' '), 'error');
+
+                    if (!nombre) {
+                        contactForm.elements.nombre.focus();
+                    } else if (!email || !isEmailValid) {
+                        contactForm.elements.email.focus();
+                    } else if (!mensaje) {
+                        contactForm.elements.mensaje.focus();
+                    }
+
+                    return;
+                }
+
+                updateFormStatus('Enviando tu consulta...', null);
+
+                if (contactSubmitButton) {
+                    contactSubmitButton.setAttribute('disabled', 'true');
+                    contactSubmitButton.setAttribute('aria-busy', 'true');
+                }
+
+                const endpoint = (contactForm.getAttribute('action') || '').trim();
+                const method = (contactForm.getAttribute('method') || 'POST').toUpperCase();
+                const shouldSubmitRemotely = endpoint && endpoint !== '#';
+
+                try {
+                    if (shouldSubmitRemotely) {
+                        const requestInit = {
+                            method,
+                            headers: {
+                                Accept: 'application/json'
+                            }
+                        };
+
+                        if (method === 'GET') {
+                            const query = new URLSearchParams(formData).toString();
+                            const requestUrl = endpoint.includes('?') ? `${endpoint}&${query}` : `${endpoint}?${query}`;
+                            const response = await fetch(requestUrl, requestInit);
+
+                            if (!response.ok) {
+                                throw new Error('Error al enviar la consulta');
+                            }
+                        } else {
+                            requestInit.body = formData;
+                            const response = await fetch(endpoint, requestInit);
+
+                            if (!response.ok) {
+                                throw new Error('Error al enviar la consulta');
+                            }
+                        }
+                    } else {
+                        await new Promise((resolve) => setTimeout(resolve, 600));
+                    }
+
+                    updateFormStatus('¡Gracias! Recibimos tu consulta y te responderemos a la brevedad.', 'success');
+                    contactForm.reset();
+                } catch (error) {
+                    console.error(error);
+                    updateFormStatus('No pudimos enviar tu consulta en este momento. Intentá nuevamente más tarde o utilizá nuestros medios alternativos de contacto.', 'error');
+                } finally {
+                    if (contactSubmitButton) {
+                        contactSubmitButton.removeAttribute('disabled');
+                        contactSubmitButton.removeAttribute('aria-busy');
+                    }
+                }
+            });
+
+            contactForm.addEventListener('input', () => {
+                if (formStatus.classList.contains('form__status--error')) {
+                    updateFormStatus('', null);
+                }
+            });
+        }
     </script>
 </body>
 </html>
