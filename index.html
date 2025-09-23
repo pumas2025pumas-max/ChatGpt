@@ -103,10 +103,155 @@
         <p class="footer__legal">La información de este sitio es meramente orientativa y no reemplaza el asesoramiento profesional personalizado.</p>
     </footer>
 
+    <button class="chatbot__toggle" type="button" aria-controls="chatbot" aria-expanded="false">
+        <span class="chatbot__toggle-icon" aria-hidden="true">💬</span>
+        <span class="chatbot__toggle-text">Asistente</span>
+    </button>
+
+    <div id="chatbot" class="chatbot chatbot--closed" role="dialog" aria-modal="false" aria-label="Asistente virtual de Estudio Meraki">
+        <div class="chatbot__header">
+            <div class="chatbot__heading">
+                <p class="chatbot__eyebrow">Asistente virtual</p>
+                <h2 class="chatbot__title">Meraki Chat</h2>
+            </div>
+            <button type="button" class="chatbot__close" aria-label="Cerrar chat">&times;</button>
+        </div>
+        <div class="chatbot__messages" role="log" aria-live="polite"></div>
+        <form class="chatbot__form" autocomplete="off">
+            <label class="visually-hidden" for="chatbot-input">Escribe tu consulta</label>
+            <input id="chatbot-input" class="chatbot__input" type="text" name="mensaje" placeholder="Escribí tu consulta..." required>
+            <button type="submit" class="chatbot__send">Enviar</button>
+        </form>
+    </div>
+
     <script>
         const yearElement = document.getElementById('year');
         const currentYear = new Date().getFullYear();
         yearElement.textContent = currentYear;
+
+        const chatbotToggle = document.querySelector('.chatbot__toggle');
+        const chatbotElement = document.getElementById('chatbot');
+        const chatbotCloseButton = document.querySelector('.chatbot__close');
+        const chatbotForm = document.querySelector('.chatbot__form');
+        const chatbotInput = document.querySelector('.chatbot__input');
+        const chatbotMessages = document.querySelector('.chatbot__messages');
+
+        const knowledgeBase = [
+            {
+                keywords: ['telefono', 'teléfono', 'whatsapp', 'llamar', 'celular'],
+                answer: 'Podés comunicarte al +54 9 11 6257-6017 por llamada o WhatsApp para recibir asesoramiento inmediato.'
+            },
+            {
+                keywords: ['correo', 'mail', 'email'],
+                answer: 'Escribinos a ejcmeraki@gmail.com y te responderemos dentro de las próximas 24 horas hábiles.'
+            },
+            {
+                keywords: ['horario', 'hora', 'cuando', 'disponible'],
+                answer: 'Nuestro equipo responde consultas de lunes a viernes de 9 a 18 h (GMT-3).'
+            },
+            {
+                keywords: ['reunion', 'presencial', 'virtual', 'ubicacion', 'direccion'],
+                answer: 'Agendamos reuniones virtuales y presenciales con coordinación previa en Ciudad de Buenos Aires.'
+            },
+            {
+                keywords: ['servicios', 'areas', 'ofrecen', 'ayuda', 'especialidad'],
+                answer: 'Asistimos en constitución de sociedades, gestión contable, impuestos y representación legal integral para emprendedores y pymes.'
+            },
+            {
+                keywords: ['honorarios', 'costo', 'precio', 'tarifa'],
+                answer: 'Determinamos los honorarios según el alcance del caso. Contanos más detalles y te enviaremos una propuesta a medida.'
+            },
+            {
+                keywords: ['documentacion', 'documentos', 'informacion', 'datos'],
+                answer: 'Podés adjuntar documentación relevante cuando coordinemos la reunión o enviarla por correo seguro para agilizar el análisis.'
+            },
+            {
+                keywords: ['gracias', 'gracias!'],
+                answer: '¡Gracias a vos por escribirnos! ¿Hay algo más en lo que podamos ayudarte?'
+            }
+        ];
+
+        function normalize(text) {
+            return text
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '');
+        }
+
+        function toggleChat(forceOpen) {
+            const shouldOpen = forceOpen !== undefined ? forceOpen : chatbotElement.classList.contains('chatbot--closed');
+
+            if (shouldOpen) {
+                chatbotElement.classList.add('chatbot--open');
+                chatbotElement.classList.remove('chatbot--closed');
+                chatbotToggle.setAttribute('aria-expanded', 'true');
+                chatbotToggle.classList.add('chatbot__toggle--active');
+                chatbotInput.focus();
+            } else {
+                chatbotElement.classList.remove('chatbot--open');
+                chatbotElement.classList.add('chatbot--closed');
+                chatbotToggle.setAttribute('aria-expanded', 'false');
+                chatbotToggle.classList.remove('chatbot__toggle--active');
+            }
+        }
+
+        function addMessage(text, sender) {
+            const bubble = document.createElement('div');
+            bubble.className = `chatbot__bubble chatbot__bubble--${sender}`;
+            const paragraph = document.createElement('p');
+            paragraph.textContent = text;
+            bubble.appendChild(paragraph);
+            chatbotMessages.appendChild(bubble);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function getResponse(message) {
+            const normalizedMessage = normalize(message);
+
+            for (const entry of knowledgeBase) {
+                const hasMatch = entry.keywords.some((keyword) => normalizedMessage.includes(normalize(keyword)));
+                if (hasMatch) {
+                    return entry.answer;
+                }
+            }
+
+            return 'Gracias por tu consulta. Para brindarte la mejor respuesta, contanos más detalles o escribinos a ejcmeraki@gmail.com.';
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const userMessage = chatbotInput.value.trim();
+
+            if (!userMessage) {
+                return;
+            }
+
+            addMessage(userMessage, 'user');
+            chatbotInput.value = '';
+
+            window.requestAnimationFrame(() => {
+                const response = getResponse(userMessage);
+                setTimeout(() => addMessage(response, 'bot'), 350);
+            });
+        }
+
+        chatbotToggle.addEventListener('click', () => {
+            const isClosed = chatbotElement.classList.contains('chatbot--closed');
+            toggleChat(isClosed);
+            if (isClosed && chatbotMessages.childElementCount === 0) {
+                addMessage('¡Hola! Soy el asistente virtual de Estudio Meraki. Contame cómo podemos ayudarte.', 'bot');
+            }
+        });
+
+        chatbotCloseButton.addEventListener('click', () => toggleChat(false));
+
+        chatbotForm.addEventListener('submit', handleSubmit);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && chatbotElement.classList.contains('chatbot--open')) {
+                toggleChat(false);
+            }
+        });
     </script>
 </body>
 </html>
