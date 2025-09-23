@@ -119,8 +119,15 @@
         <div class="chatbot__messages" role="log" aria-live="polite"></div>
         <form class="chatbot__form" autocomplete="off">
             <label class="visually-hidden" for="chatbot-input">Escribe tu consulta</label>
-            <input id="chatbot-input" class="chatbot__input" type="text" name="mensaje" placeholder="Escribí tu consulta..." required>
-            <button type="submit" class="chatbot__send">Enviar</button>
+            <div class="chatbot__suggestions" aria-label="Preguntas rápidas">
+                <button type="button" class="chatbot__suggestion" data-message="¿Cuál es el horario?">¿Cuál es el horario?</button>
+                <button type="button" class="chatbot__suggestion" data-message="Contacto por WhatsApp">Contacto por WhatsApp</button>
+                <button type="button" class="chatbot__suggestion" data-message="¿Qué servicios ofrecen?">¿Qué servicios ofrecen?</button>
+            </div>
+            <div class="chatbot__controls">
+                <input id="chatbot-input" class="chatbot__input" type="text" name="mensaje" placeholder="Escribí tu consulta..." required>
+                <button type="submit" class="chatbot__send">Enviar</button>
+            </div>
         </form>
     </div>
 
@@ -135,6 +142,7 @@
         const chatbotForm = document.querySelector('.chatbot__form');
         const chatbotInput = document.querySelector('.chatbot__input');
         const chatbotMessages = document.querySelector('.chatbot__messages');
+        const suggestionButtons = document.querySelectorAll('.chatbot__suggestion');
 
         const knowledgeBase = [
             {
@@ -218,6 +226,19 @@
             return 'Gracias por tu consulta. Para brindarte la mejor respuesta, contanos más detalles o escribinos a ejcmeraki@gmail.com.';
         }
 
+        function processUserMessage(message) {
+            if (!message) {
+                return;
+            }
+
+            addMessage(message, 'user');
+
+            window.requestAnimationFrame(() => {
+                const response = getResponse(message);
+                setTimeout(() => addMessage(response, 'bot'), 350);
+            });
+        }
+
         function handleSubmit(event) {
             event.preventDefault();
             const userMessage = chatbotInput.value.trim();
@@ -226,13 +247,8 @@
                 return;
             }
 
-            addMessage(userMessage, 'user');
             chatbotInput.value = '';
-
-            window.requestAnimationFrame(() => {
-                const response = getResponse(userMessage);
-                setTimeout(() => addMessage(response, 'bot'), 350);
-            });
+            processUserMessage(userMessage);
         }
 
         chatbotToggle.addEventListener('click', () => {
@@ -246,6 +262,14 @@
         chatbotCloseButton.addEventListener('click', () => toggleChat(false));
 
         chatbotForm.addEventListener('submit', handleSubmit);
+
+        suggestionButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const suggestedMessage = button.dataset.message?.trim();
+                processUserMessage(suggestedMessage);
+                chatbotInput.focus();
+            });
+        });
 
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && chatbotElement.classList.contains('chatbot--open')) {
