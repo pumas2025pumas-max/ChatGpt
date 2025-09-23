@@ -326,74 +326,6 @@
         const contactForm = document.querySelector('.contact__form');
         const formStatus = contactForm ? contactForm.querySelector('.form__status') : null;
         const contactSubmitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
-        const serviceMenuButtons = document.querySelectorAll('.services__menu-button');
-        const serviceItems = document.querySelectorAll('.services__item');
-
-        if (serviceMenuButtons.length) {
-            let isSyncingServices = false;
-
-            function activateService(serviceId) {
-                if (isSyncingServices) {
-                    return;
-                }
-
-                isSyncingServices = true;
-
-                serviceItems.forEach((item) => {
-                    item.open = item.dataset.service === serviceId;
-                });
-
-                serviceMenuButtons.forEach((button) => {
-                    const isActive = button.dataset.target === serviceId;
-                    button.classList.toggle('services__menu-button--active', isActive);
-                    button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-                });
-
-                window.requestAnimationFrame(() => {
-                    isSyncingServices = false;
-                });
-            }
-
-            serviceMenuButtons.forEach((button) => {
-                button.addEventListener('click', () => activateService(button.dataset.target));
-            });
-
-            serviceItems.forEach((item) => {
-                item.addEventListener('toggle', () => {
-                    if (isSyncingServices) {
-                        return;
-                    }
-
-                    if (!item.open) {
-                        activateService(item.dataset.service);
-                        return;
-                    }
-
-                    isSyncingServices = true;
-
-                    serviceItems.forEach((other) => {
-                        if (other !== item) {
-                            other.open = false;
-                        }
-                    });
-
-                    serviceMenuButtons.forEach((button) => {
-                        const isActive = button.dataset.target === item.dataset.service;
-                        button.classList.toggle('services__menu-button--active', isActive);
-                        button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-                    });
-
-                    window.requestAnimationFrame(() => {
-                        isSyncingServices = false;
-                    });
-                });
-            });
-
-            const defaultService = document.querySelector('.services__menu-button--active');
-            if (defaultService) {
-                activateService(defaultService.dataset.target);
-            }
-        }
 
         const knowledgeBase = [
             {
@@ -650,6 +582,81 @@
                 }
             });
         }
+    </script>
+
+    <script>
+        (function () {
+            const serviceMenuButtons = document.querySelectorAll('.services__menu-button');
+            const serviceItems = document.querySelectorAll('.services__item');
+
+            if (!serviceMenuButtons.length || !serviceItems.length) {
+                return;
+            }
+
+            let isSyncingServices = false;
+
+            const activateService = (serviceId) => {
+                if (!serviceId || isSyncingServices) {
+                    return;
+                }
+
+                isSyncingServices = true;
+
+                serviceItems.forEach((item) => {
+                    item.open = item.dataset.service === serviceId;
+                });
+
+                serviceMenuButtons.forEach((button) => {
+                    const isActive = button.dataset.target === serviceId;
+                    button.classList.toggle('services__menu-button--active', isActive);
+                    button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+                });
+
+                window.requestAnimationFrame(() => {
+                    isSyncingServices = false;
+                });
+            };
+
+            serviceMenuButtons.forEach((button) => {
+                button.addEventListener('click', () => activateService(button.dataset.target));
+            });
+
+            serviceItems.forEach((item) => {
+                item.addEventListener('toggle', () => {
+                    if (isSyncingServices) {
+                        return;
+                    }
+
+                    if (!item.open) {
+                        activateService(item.dataset.service);
+                        return;
+                    }
+
+                    isSyncingServices = true;
+
+                    serviceItems.forEach((otherItem) => {
+                        if (otherItem !== item) {
+                            otherItem.open = false;
+                        }
+                    });
+
+                    serviceMenuButtons.forEach((button) => {
+                        const isActive = button.dataset.target === item.dataset.service;
+                        button.classList.toggle('services__menu-button--active', isActive);
+                        button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+                    });
+
+                    window.requestAnimationFrame(() => {
+                        isSyncingServices = false;
+                    });
+                });
+            });
+
+            const defaultService = document.querySelector('.services__menu-button--active');
+            if (defaultService) {
+                activateService(defaultService.dataset.target);
+            }
+        })();
     </script>
 </body>
 </html>
