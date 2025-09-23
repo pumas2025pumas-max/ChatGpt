@@ -25,6 +25,116 @@
     </header>
 
     <main>
+        <section id="servicios" class="services" aria-labelledby="servicios-titulo">
+            <div class="services__intro">
+                <p class="services__eyebrow">Servicios legales</p>
+                <h2 id="servicios-titulo" class="services__title">Áreas de práctica que acompañan tu caso</h2>
+                <p class="services__description">Explorá nuestras principales especialidades y desplegá cada categoría para conocer en detalle los servicios que brindamos en Estudio Meraki.</p>
+            </div>
+            <div class="services__accordion">
+                <details class="services__item" open>
+                    <summary class="services__summary">
+                        <span class="services__icon" aria-hidden="true">👨‍👩‍👧</span>
+                        <span class="services__heading">Derecho de Familia</span>
+                        <span class="services__indicator" aria-hidden="true"></span>
+                    </summary>
+                    <div class="services__content">
+                        <ul class="services__list">
+                            <li>Sucesiones</li>
+                            <li>Divorcios (de común acuerdo o conflictivos)</li>
+                            <li>Convenios de alimentos, tenencia y régimen de visitas</li>
+                            <li>Adopciones y filiación</li>
+                            <li>Violencia familiar y medidas cautelares</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="services__item">
+                    <summary class="services__summary">
+                        <span class="services__icon" aria-hidden="true">💼</span>
+                        <span class="services__heading">Derecho Laboral</span>
+                        <span class="services__indicator" aria-hidden="true"></span>
+                    </summary>
+                    <div class="services__content">
+                        <ul class="services__list">
+                            <li>Asesoramiento a empleadores y trabajadores</li>
+                            <li>Reclamos por despidos, indemnizaciones y accidentes laborales</li>
+                            <li>Liquidaciones finales</li>
+                            <li>Negociaciones individuales y colectivas</li>
+                            <li>Representación ante el Ministerio de Trabajo</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="services__item">
+                    <summary class="services__summary">
+                        <span class="services__icon" aria-hidden="true">🏢</span>
+                        <span class="services__heading">Derecho Comercial y Societario</span>
+                        <span class="services__indicator" aria-hidden="true"></span>
+                    </summary>
+                    <div class="services__content">
+                        <ul class="services__list">
+                            <li>Constitución de sociedades (SRL, SA, SAS)</li>
+                            <li>Redacción de estatutos y contratos societarios</li>
+                            <li>Asesoramiento en contratos comerciales</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="services__item">
+                    <summary class="services__summary">
+                        <span class="services__icon" aria-hidden="true">⚖️</span>
+                        <span class="services__heading">Derecho Civil</span>
+                        <span class="services__indicator" aria-hidden="true"></span>
+                    </summary>
+                    <div class="services__content">
+                        <ul class="services__list">
+                            <li>Redacción y revisión de contratos</li>
+                            <li>Reclamos por daños y perjuicios</li>
+                            <li>Cobro de deudas y ejecuciones</li>
+                            <li>Defensa en juicios civiles</li>
+                            <li>Acciones de amparo</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="services__item">
+                    <summary class="services__summary">
+                        <span class="services__icon" aria-hidden="true">🛡️</span>
+                        <span class="services__heading">Derecho Penal</span>
+                        <span class="services__indicator" aria-hidden="true"></span>
+                    </summary>
+                    <div class="services__content">
+                        <ul class="services__list">
+                            <li>Defensa en causas penales</li>
+                            <li>Denuncias y querellas</li>
+                            <li>Asistencia a víctimas</li>
+                            <li>Excarcelaciones y medidas cautelares</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="services__item">
+                    <summary class="services__summary">
+                        <span class="services__icon" aria-hidden="true">🏠</span>
+                        <span class="services__heading">Derecho Inmobiliario</span>
+                        <span class="services__indicator" aria-hidden="true"></span>
+                    </summary>
+                    <div class="services__content">
+                        <ul class="services__list">
+                            <li>Boleto de compraventa</li>
+                            <li>Contrato de locación</li>
+                            <li>Asesoría en materia inmobiliaria</li>
+                            <li>Otros trámites registrales</li>
+                            <li>
+                                Fideicomisos
+                                <ul class="services__list services__list--nested">
+                                    <li>Constitución y administración</li>
+                                    <li>Fideicomisos inmobiliarios y financieros</li>
+                                    <li>Redacción y seguimiento legal</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </section>
+
         <section id="contacto" class="contact" aria-labelledby="contacto-titulo">
             <div class="contact__intro">
                 <h2 id="contacto-titulo">Conversemos sobre tu caso</h2>
@@ -78,13 +188,14 @@
                     </div>
                     <p class="form__help">Respondemos dentro de las próximas 24 horas hábiles.</p>
                     <button type="submit" class="button">Enviar consulta</button>
+                    <p class="form__status" role="status" aria-live="polite" aria-atomic="true" aria-hidden="true"></p>
                 </form>
             </div>
         </section>
 
-        <section class="highlights" aria-labelledby="servicios-titulo">
+        <section class="highlights" aria-labelledby="highlights-titulo">
             <div class="highlights__card">
-                <h2 id="servicios-titulo">¿Cómo podemos ayudarte?</h2>
+                <h2 id="highlights-titulo">¿Cómo podemos ayudarte?</h2>
                 <ul>
                     <li>Constitución y regularización de sociedades, monotributo y pymes.</li>
                     <li>Asesoramiento contable e impositivo para emprendimientos en crecimiento.</li>
@@ -143,6 +254,10 @@
         const chatbotInput = document.querySelector('.chatbot__input');
         const chatbotMessages = document.querySelector('.chatbot__messages');
         const suggestionButtons = document.querySelectorAll('.chatbot__suggestion');
+        const contactForm = document.querySelector('.contact__form');
+        const formStatus = contactForm ? contactForm.querySelector('.form__status') : null;
+        const contactSubmitButton = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+        const serviceItems = document.querySelectorAll('.services__item');
 
         const knowledgeBase = [
             {
@@ -163,7 +278,7 @@
             },
             {
                 keywords: ['servicios', 'areas', 'ofrecen', 'ayuda', 'especialidad'],
-                answer: 'Asistimos en constitución de sociedades, gestión contable, impuestos y representación legal integral para emprendedores y pymes.'
+                answer: 'Podés desplegar el menú de Servicios Legales para conocer nuestras áreas de derecho de familia, laboral, comercial y societario, civil, penal e inmobiliario. También podemos asesorarte por WhatsApp o correo para contarte más.'
             },
             {
                 keywords: ['honorarios', 'costo', 'precio', 'tarifa'],
@@ -263,6 +378,22 @@
 
         chatbotForm.addEventListener('submit', handleSubmit);
 
+        if (serviceItems.length > 0) {
+            serviceItems.forEach((item) => {
+                item.addEventListener('toggle', () => {
+                    if (!item.open) {
+                        return;
+                    }
+
+                    serviceItems.forEach((otherItem) => {
+                        if (otherItem !== item) {
+                            otherItem.open = false;
+                        }
+                    });
+                });
+            });
+        }
+
         suggestionButtons.forEach((button) => {
             button.addEventListener('click', () => {
                 const suggestedMessage = button.dataset.message?.trim();
@@ -276,6 +407,129 @@
                 toggleChat(false);
             }
         });
+
+        if (contactForm && formStatus) {
+            const statusClasses = ['form__status--success', 'form__status--error', 'form__status--visible'];
+
+            const updateFormStatus = (message = '', type) => {
+                formStatus.textContent = message;
+                formStatus.classList.remove(...statusClasses);
+
+                if (message) {
+                    formStatus.classList.add('form__status--visible');
+
+                    if (type) {
+                        formStatus.classList.add(`form__status--${type}`);
+                    }
+
+                    formStatus.setAttribute('aria-hidden', 'false');
+                } else {
+                    formStatus.setAttribute('aria-hidden', 'true');
+                }
+            };
+
+            const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+            contactForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                updateFormStatus('', null);
+
+                const formData = new FormData(contactForm);
+                const nombre = (formData.get('nombre') || '').toString().trim();
+                const email = (formData.get('email') || '').toString().trim();
+                const mensaje = (formData.get('mensaje') || '').toString().trim();
+
+                const validationErrors = [];
+                const isEmailValid = email && validateEmail(email);
+
+                if (!nombre) {
+                    validationErrors.push('Ingresá tu nombre completo.');
+                }
+
+                if (!email) {
+                    validationErrors.push('Ingresá un correo electrónico de contacto.');
+                } else if (!isEmailValid) {
+                    validationErrors.push('Revisá que el correo electrónico tenga un formato válido.');
+                }
+
+                if (!mensaje) {
+                    validationErrors.push('Contanos brevemente tu consulta para poder ayudarte.');
+                }
+
+                if (validationErrors.length > 0) {
+                    updateFormStatus(validationErrors.join(' '), 'error');
+
+                    if (!nombre) {
+                        contactForm.elements.nombre.focus();
+                    } else if (!email || !isEmailValid) {
+                        contactForm.elements.email.focus();
+                    } else if (!mensaje) {
+                        contactForm.elements.mensaje.focus();
+                    }
+
+                    return;
+                }
+
+                updateFormStatus('Enviando tu consulta...', null);
+
+                if (contactSubmitButton) {
+                    contactSubmitButton.setAttribute('disabled', 'true');
+                    contactSubmitButton.setAttribute('aria-busy', 'true');
+                }
+
+                const endpoint = (contactForm.getAttribute('action') || '').trim();
+                const method = (contactForm.getAttribute('method') || 'POST').toUpperCase();
+                const shouldSubmitRemotely = endpoint && endpoint !== '#';
+
+                try {
+                    if (shouldSubmitRemotely) {
+                        const requestInit = {
+                            method,
+                            headers: {
+                                Accept: 'application/json'
+                            }
+                        };
+
+                        if (method === 'GET') {
+                            const query = new URLSearchParams(formData).toString();
+                            const requestUrl = endpoint.includes('?') ? `${endpoint}&${query}` : `${endpoint}?${query}`;
+                            const response = await fetch(requestUrl, requestInit);
+
+                            if (!response.ok) {
+                                throw new Error('Error al enviar la consulta');
+                            }
+                        } else {
+                            requestInit.body = formData;
+                            const response = await fetch(endpoint, requestInit);
+
+                            if (!response.ok) {
+                                throw new Error('Error al enviar la consulta');
+                            }
+                        }
+                    } else {
+                        await new Promise((resolve) => setTimeout(resolve, 600));
+                    }
+
+                    updateFormStatus('¡Gracias! Recibimos tu consulta y te responderemos a la brevedad.', 'success');
+                    contactForm.reset();
+                } catch (error) {
+                    console.error(error);
+                    updateFormStatus('No pudimos enviar tu consulta en este momento. Intentá nuevamente más tarde o utilizá nuestros medios alternativos de contacto.', 'error');
+                } finally {
+                    if (contactSubmitButton) {
+                        contactSubmitButton.removeAttribute('disabled');
+                        contactSubmitButton.removeAttribute('aria-busy');
+                    }
+                }
+            });
+
+            contactForm.addEventListener('input', () => {
+                if (formStatus.classList.contains('form__status--error')) {
+                    updateFormStatus('', null);
+                }
+            });
+        }
     </script>
 </body>
 </html>
