@@ -320,6 +320,27 @@
 
       const knowledgeBase = [
         {
+          match: /(hola|buen[oa]s (d[ií]as|tardes|noches)|hey|qué tal|que tal|saludo)/,
+          response:
+            "¡Hola! Soy el asistente virtual del Estudio Meraki. ¿En qué puedo ayudarte hoy?",
+        },
+        {
+          match: /(gracias|muchas gracias|te agradezco|muy amable)/,
+          response:
+            "¡Gracias a vos por escribirnos! Si necesitás algo más, contanos y seguimos en contacto.",
+        },
+        {
+          match:
+            /(qu[ié]n sos|quien sos|qu[ié]nes son|quienes son|qu[eé] es meraki|que es meraki|sobre ustedes|qu[eé] hacen)/,
+          response:
+            "Somos un equipo interdisciplinario de abogadas y contadoras. Acompañamos a personas, familias y empresas con soluciones legales y contables integrales.",
+        },
+        {
+          match: /(experiencia|equipo|profesionales|trayectoria|interdisciplinario)/,
+          response:
+            "Trabajamos de manera interdisciplinaria, combinando la mirada legal y contable para ofrecer respuestas ágiles y personalizadas a cada consulta.",
+        },
+        {
           match: /inmobiliari|alquiler|alquilar|escritura|escrituraci|fideicomiso|propiedad|venta/,
           response:
             "En derecho inmobiliario te asistimos en boletos de compraventa, contratos de alquiler, escrituración y fideicomisos. Coordinamos todo el proceso para que tu operación sea segura.",
@@ -350,6 +371,36 @@
             "En derecho penal brindamos defensa en todas las instancias, presentación de denuncias y querellas, medidas de protección y planes de compliance preventivo.",
         },
         {
+          match: /(servicio|servicios|asesoramiento|ayuda|consulta|especialidad|área|area)/,
+          response:
+            "Contamos con asesoramiento inmobiliario, de familia, laboral, comercial y societario, civil y penal. Contame brevemente tu situación y te indico el equipo ideal.",
+        },
+        {
+          match: /(reuni[óo]n|reunion|agendar|reservar|turno|agenda|coordinar)/,
+          response:
+            "Coordinamos reuniones presenciales en Almagro o virtuales según tu disponibilidad. Escribinos por WhatsApp o completá el formulario y te proponemos un horario.",
+        },
+        {
+          match: /(modalidad|virtual|online|videollamada|presencial|distancia|remoto)/,
+          response:
+            "Podemos trabajar de forma presencial en nuestro estudio o virtualmente. Elegí la modalidad que prefieras y adaptamos la reunión a tu agenda.",
+        },
+        {
+          match: /(costo|costos|precio|tarifa|honorario|presupuesto|cu[áa]nto sale|cuanto sale)/,
+          response:
+            "Los honorarios dependen del tipo de consulta y la complejidad del caso. Contactanos por WhatsApp o correo y armamos una propuesta a medida.",
+        },
+        {
+          match: /(tiempo de respuesta|cu[áa]nto tardan|cuanto tardan|demoran|respuesta)/,
+          response:
+            "Respondemos las consultas dentro de las 24 horas hábiles. Si necesitás algo urgente, escribinos por WhatsApp y te respondemos a la brevedad.",
+        },
+        {
+          match: /(documentaci[óo]n|documentos|requisitos|informaci[óo]n previa)/,
+          response:
+            "Podés acercarnos los documentos disponibles y te indicamos si hace falta algo más para avanzar. Te ayudamos a ordenar toda la información necesaria.",
+        },
+        {
           match: /horario|hora|atenci|disponibilidad|agenda|turno/,
           response:
             "Atendemos de lunes a viernes de 9 a 18 h. Podemos coordinar una reunión presencial o virtual según tu disponibilidad.",
@@ -364,9 +415,14 @@
           response: contactDetails,
         },
         {
-          match: /asesoramiento|servicio|ayuda|consulta/,
+          match: /(gracias por la ayuda|muy claro|perfecto|genial)/,
           response:
-            "Contamos con asesoramiento inmobiliario, de familia, laboral, comercial y societario, civil y penal. Contame brevemente tu situación y te indico el equipo ideal.",
+            "¡Me alegra que la información te sirva! Si aparece otra duda, escribime cuando quieras.",
+        },
+        {
+          match: /(adios|chau|hasta luego|nos vemos)/,
+          response:
+            "¡Hasta luego! Cuando quieras retomar la conversación, escribinos y seguimos charlando.",
         },
       ];
 
@@ -402,7 +458,7 @@
       function findResponse(message) {
         const normalized = message.toLowerCase();
 
-        const directContactKeywords = /(tel[eé]fono|whatsapp|contacto directo|correo|email)/;
+        const directContactKeywords = /(tel[eé]fono|whatsapp|contacto directo|correo|email|llamar|celular|celu)/;
         if (directContactKeywords.test(normalized)) {
           return contactDetails;
         }
