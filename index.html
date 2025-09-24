@@ -21,7 +21,6 @@
           <a href="#servicios">Servicios</a>
           <a href="#contacto">Contacto</a>
           <a class="site-nav__cta" href="https://wa.me/5491162576017" target="_blank" rel="noopener">
-
             WhatsApp directo
           </a>
         </nav>
@@ -172,6 +171,43 @@
           </details>
         </div>
       </section>
+      <section class="chatbot" id="asistente">
+        <div class="section-heading section-heading--center">
+          <span class="section-heading__eyebrow">Asistente virtual</span>
+          <h2>Chateá con Meraki para resolver tus dudas rápidas</h2>
+          <p>
+            Consultá sobre nuestras áreas de asesoramiento o pedí los datos de contacto. Nuestro asistente te
+            orienta y, si el caso lo requiere, te comparte los medios para hablar directamente con el equipo.
+          </p>
+        </div>
+        <div class="chatbot__widget">
+          <div class="chatbot__messages" id="chatbot-messages" aria-live="polite"></div>
+          <div class="chatbot__suggestions" aria-label="Consultas sugeridas">
+            <button type="button" data-question="Quisiera información sobre derecho inmobiliario">
+              Derecho inmobiliario
+            </button>
+            <button type="button" data-question="Necesito asesoramiento en derecho de familia">
+              Derecho de familia
+            </button>
+            <button type="button" data-question="Me despidieron del trabajo, ¿me pueden ayudar?">
+              Derecho laboral
+            </button>
+            <button type="button" data-question="¿Cuál es el teléfono de contacto?">Datos de contacto</button>
+          </div>
+          <form class="chatbot__form" id="chatbot-form">
+            <label class="visually-hidden" for="chatbot-input">Escribí tu consulta</label>
+            <input
+              id="chatbot-input"
+              name="mensaje"
+              type="text"
+              autocomplete="off"
+              placeholder="Escribí tu consulta acá..."
+              required
+            />
+            <button type="submit" class="button button--primary">Enviar</button>
+          </form>
+        </div>
+      </section>
 
       <section class="contact" id="contacto">
         <div class="section-heading">
@@ -193,12 +229,11 @@
               <li>
                 <span>Email</span>
                 <a href="mailto:ejcmeraki@gmail.com">ejcmeraki@gmail.com</a>
-
               </li>
               <li>
                 <span>Dirección</span>
                 <address>
-                  
+
                   Guardia Vieja 3732 4 E<br />
                   Almagro, Ciudad Autónoma de Buenos Aires
 
@@ -271,6 +306,153 @@
       const yearElement = document.getElementById("year");
       if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
+      }
+
+      const chatbotMessages = document.getElementById("chatbot-messages");
+      const chatbotForm = document.getElementById("chatbot-form");
+      const chatbotInput = document.getElementById("chatbot-input");
+      const chatbotSuggestionButtons = document.querySelectorAll(
+        ".chatbot__suggestions button[data-question]"
+      );
+
+      const contactDetails =
+        "Podés comunicarte al +54 9 11 6257-6017 (WhatsApp o llamada) o escribirnos a ejcmeraki@gmail.com. También podés visitarnos en Guardia Vieja 3732 4 E, Almagro, CABA.";
+
+      const knowledgeBase = [
+        {
+          match: /inmobiliari|alquiler|alquilar|escritura|escrituraci|fideicomiso|propiedad|venta/,
+          response:
+            "En derecho inmobiliario te asistimos en boletos de compraventa, contratos de alquiler, escrituración y fideicomisos. Coordinamos todo el proceso para que tu operación sea segura.",
+        },
+        {
+          match: /familia|divorci|alimento|cuidad|régimen|regimen|adopci|filiaci|violencia/,
+          response:
+            "El área de familia acompaña divorcios, convenios de alimentos y cuidado personal, sucesiones, adopciones y situaciones de violencia familiar con un enfoque humano y cercano.",
+        },
+        {
+          match: /laboral|trabaj|despido|liquidaci|indemnizaci|accidente/,
+          response:
+            "Nuestro equipo laboral asesora a personas y empresas en despidos, liquidaciones, indemnizaciones, accidentes de trabajo y negociaciones ante el Ministerio de Trabajo.",
+        },
+        {
+          match: /societari|comercial|empresa|sociedad|estatuto|s\.?a|srl|sas|contrato comercial/,
+          response:
+            "En derecho comercial y societario constituimos sociedades (SRL, SA, SAS), redactamos estatutos y contratos, y acompañamos reorganizaciones y cumplimiento normativo.",
+        },
+        {
+          match: /civil|contrato civil|daño|perjuicio|deuda|ejecuci|amparo|mediaci/,
+          response:
+            "El área civil cubre redacción de contratos, reclamos por daños, cobro de deudas, acciones de amparo y soluciones extrajudiciales.",
+        },
+        {
+          match: /penal|denuncia|querella|excarcelaci|delito|victima|víctima/,
+          response:
+            "En derecho penal brindamos defensa en todas las instancias, presentación de denuncias y querellas, medidas de protección y planes de compliance preventivo.",
+        },
+        {
+          match: /horario|hora|atenci|disponibilidad|agenda|turno/,
+          response:
+            "Atendemos de lunes a viernes de 9 a 18 h. Podemos coordinar una reunión presencial o virtual según tu disponibilidad.",
+        },
+        {
+          match: /direcci|ubicaci|dónde están|donde estan/,
+          response:
+            "Estamos en Guardia Vieja 3732 4 E, en el barrio de Almagro, Ciudad Autónoma de Buenos Aires. Te esperamos con cita previa.",
+        },
+        {
+          match: /correo|mail|email|escribir|contacto|tel[eé]fono|whatsapp|llamar|comunicar/,
+          response: contactDetails,
+        },
+        {
+          match: /asesoramiento|servicio|ayuda|consulta/,
+          response:
+            "Contamos con asesoramiento inmobiliario, de familia, laboral, comercial y societario, civil y penal. Contame brevemente tu situación y te indico el equipo ideal.",
+        },
+      ];
+
+      const fallbackAnswer =
+        "No estoy seguro de haber entendido tu consulta. " + contactDetails;
+
+      function formatTime(date) {
+        return date.toLocaleTimeString("es-AR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      function addMessage(role, text) {
+        if (!chatbotMessages) return;
+        const bubble = document.createElement("div");
+        bubble.classList.add("chatbot__bubble", `chatbot__bubble--${role}`);
+
+        const messageText = document.createElement("p");
+        messageText.textContent = text;
+        bubble.appendChild(messageText);
+
+        const timestamp = document.createElement("time");
+        const now = new Date();
+        timestamp.dateTime = now.toISOString();
+        timestamp.textContent = formatTime(now);
+        bubble.appendChild(timestamp);
+
+        chatbotMessages.appendChild(bubble);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      function findResponse(message) {
+        const normalized = message.toLowerCase();
+
+        const directContactKeywords = /(tel[eé]fono|whatsapp|contacto directo|correo|email)/;
+        if (directContactKeywords.test(normalized)) {
+          return contactDetails;
+        }
+
+        for (const item of knowledgeBase) {
+          if (item.match.test(normalized)) {
+            return item.response;
+          }
+        }
+
+        return fallbackAnswer;
+      }
+
+      function handleUserMessage(message) {
+        const trimmed = message.trim();
+        if (!trimmed) return;
+        addMessage("user", trimmed);
+
+        window.setTimeout(() => {
+          const reply = findResponse(trimmed);
+          addMessage("bot", reply);
+        }, 350);
+      }
+
+      if (chatbotForm && chatbotInput) {
+        chatbotForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const userMessage = chatbotInput.value;
+          chatbotInput.value = "";
+          handleUserMessage(userMessage);
+        });
+      }
+
+      chatbotSuggestionButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const { question } = button.dataset;
+          if (!question) return;
+          if (chatbotInput) {
+            chatbotInput.value = "";
+            chatbotInput.focus();
+          }
+          handleUserMessage(question);
+        });
+      });
+
+      if (chatbotMessages) {
+        addMessage(
+          "bot",
+          "Hola, soy el asistente virtual del Estudio Meraki. Contame qué tipo de consulta tenés y te orientaré."
+        );
       }
     </script>
   </body>
