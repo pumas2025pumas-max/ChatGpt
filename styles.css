@@ -50,8 +50,8 @@ a:focus {
 }
 
 .site-header {
-  background: radial-gradient(circle at top left, rgba(50, 70, 148, 0.25), transparent 60%),
-    linear-gradient(135deg, rgba(247, 242, 234, 0.9), rgba(255, 255, 255, 0.95));
+  background: #0f172f;
+  color: #fff;
   padding: 2rem clamp(1.25rem, 6vw, 4rem) 5rem;
   position: relative;
   overflow: hidden;
@@ -64,6 +64,29 @@ a:focus {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  z-index: 1;
+}
+
+.site-header::before {
+  background: linear-gradient(115deg, rgba(11, 18, 36, 0.82), rgba(17, 33, 74, 0.55));
+}
+
+.site-header::after {
+  background: radial-gradient(circle at 85% -10%, rgba(243, 195, 114, 0.25), transparent 45%);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-media__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(105%);
 }
 
 .site-header::before {
@@ -124,10 +147,23 @@ a:focus {
   text-decoration: none;
   font-weight: 500;
   padding: 0.45rem 0.15rem;
+  color: inherit;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus {
+  opacity: 1;
+}
+
+.site-header a:hover,
+.site-header a:focus {
+  color: #fff;
 }
 
 .site-nav__cta {
-  border: 2px solid rgba(50, 70, 148, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.45);
   border-radius: 999px;
   padding: 0.6rem 1.3rem;
   transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
@@ -135,8 +171,8 @@ a:focus {
 
 .site-nav__cta:hover,
 .site-nav__cta:focus {
-  border-color: rgba(50, 70, 148, 0.7);
-  background: var(--color-primary);
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.15);
   color: #fff;
 }
 
@@ -153,7 +189,7 @@ a:focus {
   text-transform: uppercase;
   letter-spacing: 0.24em;
   font-size: 0.75rem;
-  color: var(--color-primary-dark);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 1rem;
 }
 
@@ -161,13 +197,13 @@ a:focus {
   font-family: var(--font-display);
   font-size: clamp(2.7rem, 8vw, 4rem);
   margin: 0.35rem 0 1.2rem;
-  color: var(--color-primary-dark);
+  color: #fff;
 }
 
 .hero__lead {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: var(--color-muted);
+  color: rgba(255, 255, 255, 0.85);
   margin: 0 auto 2.5rem;
 }
 
