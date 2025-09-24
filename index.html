@@ -27,6 +27,8 @@
           <a href="#sobre-el-estudio">El estudio</a>
           <a href="#equipo">Equipo</a>
           <a href="#servicios">Servicios</a>
+          <a href="#recursos">Recursos</a>
+          <a href="#preguntas-frecuentes">Preguntas frecuentes</a>
           <a href="#contacto">Contacto</a>
           <a class="site-nav__cta" href="https://wa.me/5491162576017" target="_blank" rel="noopener">
             WhatsApp directo
@@ -324,6 +326,101 @@
           </div>
         </div>
       </section>
+
+      <section class="resources" id="recursos">
+        <div class="section-heading section-heading--center">
+          <span class="section-heading__eyebrow">Material para tu consulta</span>
+          <h2>Recursos descargables y guías prácticas</h2>
+          <p>
+            Prepará tu encuentro con el estudio con herramientas diseñadas por nuestro equipo. Te ayudan a
+            reunir documentación, ordenar tus dudas y proyectar los próximos pasos con claridad.
+          </p>
+        </div>
+        <div class="resources__grid">
+          <article class="resource-card">
+            <div class="resource-card__icon" aria-hidden="true">📘</div>
+            <h3>Guía para consultas legales</h3>
+            <p>
+              Checklist editable para reunir escrituras, contratos, DNI y toda la información relevante antes
+              de tu primera reunión legal.
+            </p>
+            <a class="button button--ghost" href="https://bit.ly/meraki-guia-legal" target="_blank" rel="noopener">
+              Descargar guía
+            </a>
+          </article>
+          <article class="resource-card">
+            <div class="resource-card__icon" aria-hidden="true">🧾</div>
+            <h3>Planilla impositiva anual</h3>
+            <p>
+              Modelo en formato spreadsheet para registrar ingresos, gastos deducibles y vencimientos
+              tributarios de manera ordenada.
+            </p>
+            <a class="button button--ghost" href="https://bit.ly/meraki-planilla-impositiva" target="_blank" rel="noopener">
+              Abrir planilla
+            </a>
+          </article>
+          <article class="resource-card">
+            <div class="resource-card__icon" aria-hidden="true">🏢</div>
+            <h3>Checklist sociedades</h3>
+            <p>
+              Listado con los pasos esenciales para constituir o regularizar sociedades SRL, SA o SAS en la
+              Ciudad de Buenos Aires.
+            </p>
+            <a class="button button--ghost" href="https://bit.ly/meraki-checklist-sociedades" target="_blank" rel="noopener">
+              Ver checklist
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="faq" id="preguntas-frecuentes">
+        <div class="section-heading section-heading--center">
+          <span class="section-heading__eyebrow">Resolvemos tus dudas</span>
+          <h2>Preguntas frecuentes sobre el estudio</h2>
+          <p>
+            Respondemos las inquietudes habituales sobre nuestra modalidad de trabajo, tiempos de respuesta y
+            documentación inicial. Si necesitás más información, escribinos directamente.
+          </p>
+        </div>
+        <div class="faq__list">
+          <details class="faq-item" open>
+            <summary>¿Cuál es el horario de atención?</summary>
+            <p>
+              Atendemos consultas de lunes a viernes de 9 a 18 h. Podés agendar videollamadas fuera de ese
+              horario con coordinación previa.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Ofrecen reuniones virtuales?</summary>
+            <p>
+              Sí, realizamos encuentros por Google Meet o Zoom. Compartinos tu disponibilidad y enviamos el
+              enlace para la videollamada.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cómo prepararme para la primera entrevista?</summary>
+            <p>
+              Recomendamos completar las guías descargables, reunir documentación básica (DNI, constancias
+              fiscales, contratos) y listar tus objetivos y dudas principales.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Trabajan con personas y empresas de todo el país?</summary>
+            <p>
+              Sí. Gestionamos trámites en CABA y Provincia de Buenos Aires, y contamos con alianzas para
+              acompañar gestiones en otras jurisdicciones mediante firmas asociadas.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Qué medios de pago aceptan?</summary>
+            <p>
+              Aceptamos transferencias bancarias, Mercado Pago y, para planes mensuales, débitos automáticos.
+              Para trabajos puntuales cotizamos por proyecto con un presupuesto previo.
+            </p>
+          </details>
+        </div>
+      </section>
+
       <section class="chatbot" id="asistente">
         <div class="section-heading section-heading--center">
           <span class="section-heading__eyebrow">Asistente virtual</span>
@@ -356,6 +453,12 @@
             </button>
             <button type="button" data-question="Me interesa el servicio laboral y previsional contable">
               Laborales y previsionales
+            </button>
+            <button type="button" data-question="¿Tienen recursos o guías para prepararme?">
+              Recursos descargables
+            </button>
+            <button type="button" data-question="Quiero leer preguntas frecuentes sobre el estudio">
+              Preguntas frecuentes
             </button>
             <button type="button" data-question="¿Cuál es el teléfono de contacto?">Datos de contacto</button>
           </div>
@@ -475,6 +578,8 @@
         <a href="#inicio">Inicio</a>
         <a href="#sobre-el-estudio">El estudio</a>
         <a href="#servicios">Servicios</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#preguntas-frecuentes">Preguntas frecuentes</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </footer>
@@ -557,6 +662,31 @@
           match: /civil|contrato civil|daño|perjuicio|deuda|ejecuci|amparo|mediaci/,
           response:
             "El área civil cubre redacción de contratos, reclamos por daños, cobro de deudas, acciones de amparo y soluciones extrajudiciales.",
+        },
+        {
+          match: /(recurso|gu[ií]a|material|descargable|planilla|checklist|prepararme)/,
+          response:
+            "Podés descargar nuestra guía para consultas legales, la planilla impositiva anual y el checklist societario desde la sección Recursos del sitio. Cada documento te orienta sobre la información a reunir antes del encuentro.",
+        },
+        {
+          match: /(preguntas frecuentes|faq|duda frecuente|informaci[óo]n general)/,
+          response:
+            "En la sección Preguntas frecuentes encontrarás detalles sobre horarios de atención, reuniones virtuales, preparación para la primera entrevista, alcance geográfico y medios de pago del estudio.",
+        },
+        {
+          match: /(horario de atenci[óo]n|cu[aá]ndo atienden|horarios|disponibilidad)/,
+          response:
+            "Nuestro horario de atención es de lunes a viernes de 9 a 18 h. Podemos coordinar videollamadas en otros horarios si lo necesitás.",
+        },
+        {
+          match: /(reuni[oó]n virtual|videollamada|online|a distancia|remot)/,
+          response:
+            "Sí, trabajamos de forma presencial y virtual. Coordinamos reuniones por Google Meet o Zoom para facilitar el seguimiento de tu caso sin importar dónde estés.",
+        },
+        {
+          match: /(medio de pago|forma de pago|pagar|transferencia|mercado pago|tarjeta|cobranza)/,
+          response:
+            "Aceptamos transferencias bancarias, Mercado Pago y débitos automáticos para planes mensuales. Antes de comenzar te enviamos un presupuesto con el detalle de honorarios.",
         },
         {
           match: /penal|denuncia|querella|excarcelaci|delito|victima|víctima/,

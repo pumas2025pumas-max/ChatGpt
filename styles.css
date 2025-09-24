@@ -327,6 +327,8 @@ main {
 
 .about,
 .services,
+.resources,
+.faq,
 .chatbot,
 .contact {
   max-width: var(--max-width);
@@ -426,6 +428,87 @@ main {
 
 .service-accordion__item summary::-webkit-details-marker {
   display: none;
+}
+
+.resources__grid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.resource-card {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.75rem, 3vw, 2.25rem);
+  border-radius: var(--radius-md);
+  background: linear-gradient(160deg, rgba(243, 195, 114, 0.12), rgba(50, 70, 148, 0.08));
+  box-shadow: inset 0 0 0 1px rgba(243, 195, 114, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resource-card:hover,
+.resource-card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 35px rgba(50, 70, 148, 0.16);
+}
+
+.resource-card__icon {
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.resource-card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--color-primary-dark);
+}
+
+.resource-card p {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.resource-card .button {
+  justify-self: start;
+}
+
+.faq__list {
+  display: grid;
+  gap: 1rem;
+}
+
+.faq-item {
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(50, 70, 148, 0.18);
+  padding: 1.15rem 1.5rem;
+  background: rgba(50, 70, 148, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.faq-item[open] {
+  background: #fff;
+  border-color: rgba(50, 70, 148, 0.35);
+  box-shadow: 0 16px 30px rgba(50, 70, 148, 0.08);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-primary-dark);
+  list-style: none;
+}
+
+.faq-item summary::marker,
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item p {
+  margin: 0.85rem 0 0;
+  line-height: 1.65;
+  color: var(--color-muted);
 }
 
 .service-accordion__title {
