@@ -327,6 +327,8 @@ main {
 
 .about,
 .services,
+.resources,
+.faq,
 .chatbot,
 .contact {
   max-width: var(--max-width);
@@ -426,6 +428,204 @@ main {
 
 .service-accordion__item summary::-webkit-details-marker {
   display: none;
+}
+
+.resources {
+  overflow: hidden;
+}
+
+.resources::before,
+.resources::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(0);
+  opacity: 0.35;
+}
+
+.resources::before {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle at center, rgba(50, 70, 148, 0.35), transparent 60%);
+  top: -180px;
+  right: -140px;
+}
+
+.resources::after {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle at center, rgba(243, 195, 114, 0.45), transparent 65%);
+  bottom: -140px;
+  left: -120px;
+}
+
+.resources__grid {
+  display: grid;
+  gap: clamp(1.75rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: stretch;
+}
+
+.resource-card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 1.1rem;
+  grid-template-rows: auto auto 1fr auto;
+  padding: clamp(1.95rem, 3vw, 2.5rem);
+  border-radius: var(--radius-md);
+  background: linear-gradient(145deg, rgba(243, 195, 114, 0.18), rgba(50, 70, 148, 0.08));
+  box-shadow: inset 0 0 0 1px rgba(243, 195, 114, 0.35), 0 18px 36px rgba(37, 41, 82, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.resource-card::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.45);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.resource-card:hover,
+.resource-card:focus-within {
+  transform: translateY(-10px);
+  box-shadow: 0 26px 48px rgba(37, 41, 82, 0.18);
+}
+
+.resource-card:hover::before,
+.resource-card:focus-within::before {
+  opacity: 1;
+}
+
+.resource-card__icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  font-size: 2rem;
+  background: rgba(50, 70, 148, 0.12);
+  color: var(--color-primary-dark);
+  box-shadow: inset 0 0 0 1px rgba(50, 70, 148, 0.15);
+}
+
+.resource-card h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--color-primary-dark);
+  font-family: var(--font-display);
+}
+
+.resource-card__description {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.resource-card .button {
+  justify-self: start;
+  margin-top: 0.25rem;
+}
+
+.faq__list {
+  display: grid;
+  gap: 1.15rem;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(50, 70, 148, 0.18);
+  padding: 1.2rem 1.5rem;
+  background: rgba(50, 70, 148, 0.04);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.faq-item:focus-within {
+  border-color: rgba(50, 70, 148, 0.45);
+  box-shadow: 0 0 0 4px rgba(50, 70, 148, 0.12);
+}
+
+.faq-item[open] {
+  background: #fff;
+  border-color: rgba(50, 70, 148, 0.35);
+  box-shadow: 0 20px 42px rgba(50, 70, 148, 0.12);
+  transform: translateY(-3px);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-primary-dark);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.faq-item summary::marker,
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(50, 70, 148, 0.08);
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+  background: var(--color-primary);
+  color: #fff;
+  transform: rotate(180deg);
+}
+
+.faq-item summary:focus-visible {
+  outline: none;
+}
+
+.faq-item p {
+  margin: 1rem 0 0;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+@media (max-width: 640px) {
+  .resource-card {
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .faq-item {
+    padding: 1.1rem 1.2rem;
+  }
+
+  .faq-item summary {
+    align-items: flex-start;
+  }
+
+  .faq-item summary::after {
+    margin-top: 0.35rem;
+  }
 }
 
 .service-accordion__title {
