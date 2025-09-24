@@ -630,6 +630,21 @@ main {
   min-height: 140px;
 }
 
+.form__status {
+  margin: -0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  min-height: 1.35rem;
+}
+
+.form__status--success {
+  color: #1f7a4d;
+}
+
+.form__status--error {
+  color: #b32323;
+}
+
 .form__disclaimer {
   margin: 0;
   font-size: 0.85rem;
