@@ -84,6 +84,27 @@
         </div>
       </section>
 
+      <section class="stats" aria-label="Indicadores destacados del estudio">
+        <ul class="stats__grid">
+          <li class="stats-card">
+            <span class="stats-card__value">10+</span>
+            <p class="stats-card__label">años de experiencia litigando y asesorando empresas y familias.</p>
+          </li>
+          <li class="stats-card">
+            <span class="stats-card__value">300+</span>
+            <p class="stats-card__label">gestiones legales y contables resueltas con acompañamiento cercano.</p>
+          </li>
+          <li class="stats-card">
+            <span class="stats-card__value">95%</span>
+            <p class="stats-card__label">de consultas respondidas en menos de 24 horas hábiles.</p>
+          </li>
+          <li class="stats-card">
+            <span class="stats-card__value">100%</span>
+            <p class="stats-card__label">compromiso con la confidencialidad y la claridad en cada etapa.</p>
+          </li>
+        </ul>
+      </section>
+
       <section class="team" id="equipo">
         <div class="section-heading">
           <span class="section-heading__eyebrow">Equipo profesional</span>
@@ -186,6 +207,103 @@
               </a>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section class="process" aria-labelledby="proceso-titulo">
+        <div class="section-heading">
+          <span class="section-heading__eyebrow">Cómo trabajamos</span>
+          <h2 id="proceso-titulo">Metodología colaborativa para cada caso</h2>
+          <p>
+            Ordenamos cada intervención en etapas claras para que entiendas el estado de tu consulta en todo
+            momento. Nuestro equipo coordina reuniones interdisciplinarias para alinear la estrategia legal y
+            contable desde el primer día.
+          </p>
+        </div>
+        <ol class="process__timeline">
+          <li class="process-step">
+            <div class="process-step__badge" aria-hidden="true">1</div>
+            <div class="process-step__content">
+              <h3>Escucha y diagnóstico</h3>
+              <p>
+                Relevamos tu situación, analizamos la documentación disponible y definimos el alcance del
+                servicio con objetivos concretos.
+              </p>
+            </div>
+          </li>
+          <li class="process-step">
+            <div class="process-step__badge" aria-hidden="true">2</div>
+            <div class="process-step__content">
+              <h3>Diseño de estrategia</h3>
+              <p>
+                Elaboramos un plan legal y/o contable con escenarios posibles, cronograma de acciones y
+                responsables asignados.
+              </p>
+            </div>
+          </li>
+          <li class="process-step">
+            <div class="process-step__badge" aria-hidden="true">3</div>
+            <div class="process-step__content">
+              <h3>Ejecución y seguimiento</h3>
+              <p>
+                Implementamos la estrategia, enviamos reportes periódicos y adaptamos el plan ante cambios
+                regulatorios o nuevas necesidades.
+              </p>
+            </div>
+          </li>
+          <li class="process-step">
+            <div class="process-step__badge" aria-hidden="true">4</div>
+            <div class="process-step__content">
+              <h3>Cierre y próximos pasos</h3>
+              <p>
+                Documentamos resultados, sugerimos acciones preventivas y quedamos disponibles para
+                acompañarte en futuras gestiones.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="testimonials" aria-labelledby="testimonios-titulo">
+        <div class="section-heading section-heading--center">
+          <span class="section-heading__eyebrow">Experiencias reales</span>
+          <h2 id="testimonios-titulo">Historias de confianza con Estudio Meraki</h2>
+          <p>
+            Estas son algunas de las voces de quienes confiaron en nuestro equipo para resolver casos legales,
+            contables y societarios con un trato humano y profesional.
+          </p>
+        </div>
+        <div class="testimonials__grid">
+          <figure class="testimonial-card">
+            <blockquote>
+              “Nos ayudaron a ordenar toda la documentación societaria y adaptar los contratos en tiempo récord.
+              Valoramos mucho la claridad con la que explican cada paso.”
+            </blockquote>
+            <figcaption>
+              <strong>Luciana G.</strong>
+              <span>Directora de PyME de servicios</span>
+            </figcaption>
+          </figure>
+          <figure class="testimonial-card">
+            <blockquote>
+              “El equipo contable diseñó una planificación impositiva que nos permitió crecer sin sobresaltos.
+              Siempre están disponibles para responder nuestras dudas.”
+            </blockquote>
+            <figcaption>
+              <strong>Federico R.</strong>
+              <span>Emprendedor tecnológico</span>
+            </figcaption>
+          </figure>
+          <figure class="testimonial-card">
+            <blockquote>
+              “En un proceso de sucesión complejo supieron contenernos y avanzar con todo lo necesario. Sentimos
+              el acompañamiento humano desde el primer encuentro.”
+            </blockquote>
+            <figcaption>
+              <strong>Mariana y Diego</strong>
+              <span>Familia asesorada en derecho de familia</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -507,6 +625,10 @@
       </nav>
     </footer>
 
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Volver al inicio">
+      ↑
+    </button>
+
     <script>
       const yearElement = document.getElementById("year");
       if (yearElement) {
@@ -752,6 +874,7 @@
 
       const contactForm = document.getElementById("contact-form");
       const contactFormStatus = document.getElementById("contact-form-status");
+      const backToTopButton = document.getElementById("back-to-top");
 
       function setContactStatus(message, type) {
         if (!contactFormStatus) return;
@@ -813,6 +936,24 @@
 
       if (contactForm && window.fetch) {
         contactForm.addEventListener("submit", handleContactFormSubmit);
+      }
+
+      if (backToTopButton) {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const toggleBackToTopVisibility = () => {
+          const shouldShow = window.scrollY > 320;
+          backToTopButton.classList.toggle("back-to-top--visible", shouldShow);
+        };
+
+        window.addEventListener("scroll", toggleBackToTopVisibility, { passive: true });
+        toggleBackToTopVisibility();
+
+        backToTopButton.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+          });
+        });
       }
     </script>
   </body>
