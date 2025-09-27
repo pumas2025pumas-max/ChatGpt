@@ -271,13 +271,24 @@ main {
   opacity: 1;
 }
 
-.team-card__photo {
+.team-card__avatar {
+  flex-shrink: 0;
   width: 120px;
-  height: 120px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
-  object-fit: cover;
+  overflow: hidden;
   border: 4px solid rgba(50, 70, 148, 0.1);
   box-shadow: 0 12px 25px rgba(37, 41, 82, 0.18);
+  background: linear-gradient(135deg, rgba(50, 70, 148, 0.08), rgba(243, 195, 114, 0.16));
+  position: relative;
+}
+
+.team-card__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .team-card__profile {
@@ -410,7 +421,7 @@ main {
     flex-direction: column;
   }
 
-  .team-card__photo {
+  .team-card__avatar {
     margin: 0 auto;
   }
 
