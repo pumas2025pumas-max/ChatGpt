@@ -26,6 +26,7 @@ body {
   color: var(--color-text);
   background: linear-gradient(180deg, #fdfbf8 0%, #ffffff 75%);
   min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -182,6 +183,37 @@ a:focus {
   flex-wrap: wrap;
 }
 
+.hero__metrics {
+  margin: 2.75rem auto 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.25rem;
+}
+
+.hero__metric {
+  background: rgba(15, 23, 47, 0.55);
+  backdrop-filter: blur(14px);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.3rem;
+  display: grid;
+  gap: 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.hero__metric-value {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero__metric-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
 main {
   padding: 0 clamp(1.25rem, 6vw, 4rem) 5rem;
 }
@@ -239,13 +271,24 @@ main {
   opacity: 1;
 }
 
-.team-card__photo {
+.team-card__avatar {
+  flex-shrink: 0;
   width: 120px;
-  height: 120px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
-  object-fit: cover;
+  overflow: hidden;
   border: 4px solid rgba(50, 70, 148, 0.1);
   box-shadow: 0 12px 25px rgba(37, 41, 82, 0.18);
+  background: linear-gradient(135deg, rgba(50, 70, 148, 0.08), rgba(243, 195, 114, 0.16));
+  position: relative;
+}
+
+.team-card__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .team-card__profile {
@@ -378,7 +421,7 @@ main {
     flex-direction: column;
   }
 
-  .team-card__photo {
+  .team-card__avatar {
     margin: 0 auto;
   }
 
@@ -393,6 +436,25 @@ main {
   }
 
   .team-card__cta {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero__metrics {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .cta-banner__inner {
+    text-align: center;
+  }
+
+  .cta-banner__content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-banner__actions {
     justify-content: center;
   }
 }
@@ -431,6 +493,8 @@ main {
 
 .about,
 .services,
+.process,
+.testimonials,
 .chatbot,
 .contact {
   max-width: var(--max-width);
@@ -445,6 +509,170 @@ main {
 
 .about {
   margin-top: -4rem;
+}
+
+.process {
+  overflow: hidden;
+}
+
+.process__steps {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.process-step {
+  background: linear-gradient(150deg, rgba(50, 70, 148, 0.12), rgba(243, 195, 114, 0.18));
+  border-radius: var(--radius-md);
+  padding: clamp(1.8rem, 4vw, 2.2rem);
+  display: grid;
+  gap: 1rem;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(50, 70, 148, 0.18);
+}
+
+.process-step__badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  box-shadow: 0 12px 20px rgba(50, 70, 148, 0.25);
+}
+
+.process-step h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.process-step p {
+  margin: 0;
+  line-height: 1.65;
+  color: var(--color-muted);
+}
+
+.testimonials {
+  background: linear-gradient(180deg, rgba(50, 70, 148, 0.1), rgba(247, 242, 234, 0.35));
+}
+
+.testimonials__grid {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: clamp(2.5rem, 5vw, 3.2rem);
+}
+
+.testimonial-card {
+  margin: 0;
+  padding: clamp(1.8rem, 4vw, 2.4rem);
+  border-radius: var(--radius-md);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 1.5rem;
+}
+
+.testimonial-card blockquote {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.testimonial-card blockquote::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  top: -0.25rem;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: rgba(50, 70, 148, 0.3);
+}
+
+.testimonial-card__name {
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.testimonial-card__role {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.cta-banner {
+  max-width: calc(var(--max-width) + 5rem);
+  margin: 0 auto 5.5rem;
+  padding: 0 clamp(1.25rem, 6vw, 2.5rem);
+}
+
+.cta-banner__inner {
+  background: linear-gradient(135deg, rgba(50, 70, 148, 0.92), rgba(11, 18, 36, 0.92));
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: clamp(2.75rem, 6vw, 3.75rem);
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-banner__inner::after {
+  content: "";
+  position: absolute;
+  inset: auto -30% -30% auto;
+  width: clamp(180px, 40vw, 320px);
+  height: clamp(180px, 40vw, 320px);
+  background: radial-gradient(circle, rgba(243, 195, 114, 0.45), transparent 60%);
+  opacity: 0.85;
+}
+
+.cta-banner__content,
+.cta-banner__actions {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-banner__content p {
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.cta-banner__content .section-heading__eyebrow {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.cta-banner__content h2 {
+  color: #fff;
+  margin: 0;
+}
+
+.cta-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cta-banner__actions .button--ghost {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.cta-banner__actions .button--ghost:hover,
+.cta-banner__actions .button--ghost:focus-visible {
+  border-color: rgba(255, 255, 255, 0.65);
 }
 
 .about__grid {
