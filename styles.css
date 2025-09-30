@@ -1102,6 +1102,21 @@ main {
   gap: 0.75rem;
 }
 
+.contact-map {
+  margin-top: clamp(2rem, 5vw, 3rem);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  min-height: 320px;
+  border: 0;
+  aspect-ratio: 16 / 9;
+}
+
 .form {
   background: #fff;
   border-radius: var(--radius-md);
