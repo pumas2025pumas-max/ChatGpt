@@ -1370,6 +1370,25 @@ body.is-high-contrast .site-header {
   color: #f4f7ff;
 }
 
+
+body.is-high-contrast .brand {
+  background: linear-gradient(130deg, rgba(5, 7, 15, 0.95), rgba(16, 22, 45, 0.75));
+  padding: clamp(0.35rem, 1vw, 0.65rem);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 215, 90, 0.45);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.55);
+}
+
+body.is-high-contrast .brand::after {
+  inset: -15% -10% auto auto;
+  background: radial-gradient(circle, rgba(255, 215, 90, 0.55), transparent 70%);
+  filter: blur(0.35px);
+}
+
+body.is-high-contrast .brand__image {
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.65));
+}
+
 body.is-high-contrast .site-header::before {
   background: linear-gradient(115deg, rgba(2, 4, 12, 0.92), rgba(7, 12, 30, 0.85));
 }
