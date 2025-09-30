@@ -211,6 +211,10 @@ a:focus-visible {
   padding: 0.45rem 0.9rem;
   cursor: pointer;
   transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  line-height: 1;
 }
 
 .language-toggle:hover,
@@ -220,6 +224,25 @@ a:focus-visible {
   border-color: rgba(255, 255, 255, 0.85);
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
+}
+
+.contrast-toggle__icon {
+  font-size: 1.05rem;
+  transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+}
+
+.contrast-toggle[aria-pressed="false"] .contrast-toggle__icon--sun,
+.contrast-toggle[aria-pressed="true"] .contrast-toggle__icon--moon {
+  opacity: 1;
+  transform: scale(1);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.35));
+}
+
+.contrast-toggle[aria-pressed="false"] .contrast-toggle__icon--moon,
+.contrast-toggle[aria-pressed="true"] .contrast-toggle__icon--sun {
+  opacity: 0.45;
+  transform: scale(0.85);
+  filter: none;
 }
 
 .hero {
@@ -1412,6 +1435,21 @@ body.is-high-contrast .form__status {
   color: #e4e9ff;
 }
 
+body.is-high-contrast .section-heading h2 {
+  color: #f4f7ff;
+}
+
+body.is-high-contrast .about,
+body.is-high-contrast .services,
+body.is-high-contrast .process,
+body.is-high-contrast .testimonials,
+body.is-high-contrast .chatbot,
+body.is-high-contrast .contact {
+  background: #030815;
+  border: 2px solid rgba(255, 215, 90, 0.35);
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.18);
+}
+
 body.is-high-contrast .about-card,
 body.is-high-contrast .team-card,
 body.is-high-contrast .contact-card,
@@ -1427,7 +1465,8 @@ body.is-high-contrast .about-card h3,
 body.is-high-contrast .team-card h3,
 body.is-high-contrast .contact-card h3,
 body.is-high-contrast .contact-map__title,
-body.is-high-contrast .form h3 {
+body.is-high-contrast .form h3,
+body.is-high-contrast .services__group-title {
   color: #ffd75a;
 }
 
@@ -1439,6 +1478,52 @@ body.is-high-contrast .team-card::before {
 body.is-high-contrast .team-card__tags span {
   background: rgba(255, 215, 90, 0.12);
   color: #ffd75a;
+}
+
+body.is-high-contrast .team-card__link {
+  background: #ffd75a;
+  color: #05070f;
+  border-color: #ffd75a;
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.35);
+}
+
+body.is-high-contrast .team-card__link:hover,
+body.is-high-contrast .team-card__link:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 215, 90, 0.55);
+}
+
+body.is-high-contrast .team-card__link--ghost {
+  background: transparent;
+  color: #ffd75a;
+  border-color: rgba(255, 215, 90, 0.45);
+  box-shadow: none;
+}
+
+body.is-high-contrast .team-card__link--ghost:hover,
+body.is-high-contrast .team-card__link--ghost:focus-visible {
+  background: rgba(255, 215, 90, 0.18);
+  box-shadow: none;
+  color: #05070f;
+}
+
+body.is-high-contrast .process-step {
+  background: #0d1426;
+  border: 2px solid rgba(255, 215, 90, 0.4);
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.18);
+}
+
+body.is-high-contrast .process-step__badge {
+  background: #ffd75a;
+  color: #05070f;
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.35);
+}
+
+body.is-high-contrast .process-step h3 {
+  color: #f4f7ff;
+}
+
+body.is-high-contrast .process-step p {
+  color: #e4e9ff;
 }
 
 body.is-high-contrast .service-accordion__item {
@@ -1489,6 +1574,42 @@ body.is-high-contrast .chatbot__bubble--bot {
 body.is-high-contrast .chatbot__bubble--user {
   background: #ffd75a;
   color: #05070f;
+}
+f
+body.is-high-contrast .testimonial-card {
+  background: #0d1426;
+  border: 2px solid rgba(255, 215, 90, 0.35);
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.18);
+}
+
+body.is-high-contrast .testimonial-card blockquote {
+  color: #f4f7ff;
+}
+
+body.is-high-contrast .testimonial-card blockquote::before {
+  color: rgba(255, 215, 90, 0.45);
+}
+
+body.is-high-contrast .testimonial-card__name {
+  color: #ffd75a;
+}
+
+body.is-high-contrast .testimonial-card__role {
+  color: #bcc6f9;
+}
+
+body.is-high-contrast .chatbot__messages {
+  background: #030815;
+  border: 2px solid rgba(255, 215, 90, 0.3);
+  box-shadow: inset 0 0 0 1px rgba(255, 215, 90, 0.2);
+}
+
+body.is-high-contrast .chatbot__messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 90, 0.45);
+}
+
+body.is-high-contrast .chatbot__messages::-webkit-scrollbar-track {
+  background: rgba(5, 9, 18, 0.85);
 }
 
 body.is-high-contrast .chatbot__suggestions button {
@@ -1549,6 +1670,24 @@ body.is-high-contrast .site-footer {
 
 body.is-high-contrast .site-footer__nav a {
   color: #ffd75a;
+}
+
+body.is-high-contrast .cta-banner__inner {
+  background: linear-gradient(135deg, #050912, #0d1a36);
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.35);
+}
+
+body.is-high-contrast .cta-banner__inner::after {
+  background: radial-gradient(circle, rgba(255, 215, 90, 0.35), transparent 60%);
+}
+
+body.is-high-contrast .cta-banner__content h2 {
+  color: #ffd75a;
+}
+
+body.is-high-contrast .cta-banner__content p,
+body.is-high-contrast .cta-banner__content .section-heading__eyebrow {
+  color: #e4e9ff;
 }
 
 @media (max-width: 900px) {

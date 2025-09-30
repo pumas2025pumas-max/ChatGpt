@@ -647,6 +647,9 @@ function syncHighContrastToggleState() {
   const ariaLabel = getTranslation(labelKey);
   if (ariaLabel) {
     highContrastToggle.setAttribute("aria-label", ariaLabel);
+    highContrastToggle.setAttribute("title", ariaLabel);
+  } else {
+    highContrastToggle.removeAttribute("title");
   }
   highContrastToggle.setAttribute("aria-pressed", String(isHighContrast));
 }
