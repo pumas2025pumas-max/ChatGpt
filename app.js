@@ -10,8 +10,14 @@ const chatbotSuggestionButtons = document.querySelectorAll(
   ".chatbot__suggestions button[data-question]"
 );
 const languageToggle = document.getElementById("language-toggle");
+const highContrastToggle = document.getElementById("high-contrast-toggle");
+const brandLogo = document.querySelector(".brand__image");
+const faviconLink = document.querySelector('link[rel~="icon"]');
 const contactForm = document.getElementById("contact-form");
 const contactFormStatus = document.getElementById("contact-form-status");
+const CONTRAST_STORAGE_KEY = "preferredContrastMode";
+const HIGH_CONTRAST_VALUE = "high";
+const STANDARD_CONTRAST_VALUE = "standard";
 
 const translations = {
   es: {
@@ -26,6 +32,10 @@ const translations = {
     "nav.whatsapp": "WhatsApp directo",
     "language.toggle": "EN",
     "language.toggleLabel": "Cambiar a inglés",
+    "accessibility.skipLink": "Saltar al contenido principal",
+    "accessibility.highContrast": "Alto contraste",
+    "accessibility.highContrastOffLabel": "Activar modo de alto contraste",
+    "accessibility.highContrastOnLabel": "Desactivar modo de alto contraste",
     "hero.kicker": "Soluciones legales y contables a medida",
     "hero.title": "Estudio Meraki",
     "hero.lead": "Acompañamos a personas, familias y empresas con una mirada integral. Nos enfocamos en la escucha activa, el análisis preciso y la creación de estrategias que generen confianza a largo plazo.",
@@ -258,6 +268,10 @@ const translations = {
     "nav.whatsapp": "Direct WhatsApp",
     "language.toggle": "ES",
     "language.toggleLabel": "Switch to Spanish",
+    "accessibility.skipLink": "Skip to main content",
+    "accessibility.highContrast": "High contrast",
+    "accessibility.highContrastOffLabel": "Enable high contrast mode",
+    "accessibility.highContrastOnLabel": "Disable high contrast mode",
     "hero.kicker": "Tailored legal and accounting solutions",
     "hero.title": "Meraki Firm",
     "hero.lead": "We support individuals, families, and companies with an integral approach. We focus on active listening, precise analysis, and crafting strategies that build long-term trust.",
@@ -626,6 +640,73 @@ function getTranslation(key, language = currentLanguage) {
   return fallbackDictionary[key] || "";
 }
 
+function updateBrandingForContrast(isHighContrast) {
+  if (brandLogo) {
+    const standardLogo = brandLogo.getAttribute("data-logo-standard");
+    const highContrastLogo = brandLogo.getAttribute("data-logo-high-contrast");
+    const nextLogo = isHighContrast ? highContrastLogo : standardLogo;
+    if (nextLogo && brandLogo.getAttribute("src") !== nextLogo) {
+      brandLogo.setAttribute("src", nextLogo);
+    }
+  }
+
+  if (faviconLink) {
+    const standardIcon = faviconLink.getAttribute("data-icon-standard");
+    const highContrastIcon = faviconLink.getAttribute("data-icon-high-contrast");
+    const nextIcon = isHighContrast ? highContrastIcon : standardIcon;
+    if (nextIcon && faviconLink.getAttribute("href") !== nextIcon) {
+      faviconLink.setAttribute("href", nextIcon);
+    }
+  }
+}
+
+function syncHighContrastToggleState() {
+  const isHighContrast = document.body.classList.contains("is-high-contrast");
+  updateBrandingForContrast(isHighContrast);
+  if (!highContrastToggle) return;
+  const labelKey = isHighContrast
+    ? "accessibility.highContrastOnLabel"
+    : "accessibility.highContrastOffLabel";
+  const ariaLabel = getTranslation(labelKey);
+  if (ariaLabel) {
+    highContrastToggle.setAttribute("aria-label", ariaLabel);
+    highContrastToggle.setAttribute("title", ariaLabel);
+  } else {
+    highContrastToggle.removeAttribute("title");
+  }
+  highContrastToggle.setAttribute("aria-pressed", String(isHighContrast));
+}
+
+function setHighContrastState(isEnabled, { persist = true } = {}) {
+  document.body.classList.toggle("is-high-contrast", isEnabled);
+  updateBrandingForContrast(isEnabled);
+  if (persist) {
+    localStorage.setItem(
+      CONTRAST_STORAGE_KEY,
+      isEnabled ? HIGH_CONTRAST_VALUE : STANDARD_CONTRAST_VALUE
+    );
+  }
+  syncHighContrastToggleState();
+}
+
+function initializeHighContrastPreference() {
+  const storedPreference = localStorage.getItem(CONTRAST_STORAGE_KEY);
+  if (storedPreference === HIGH_CONTRAST_VALUE) {
+    setHighContrastState(true, { persist: false });
+  } else if (storedPreference === STANDARD_CONTRAST_VALUE) {
+    setHighContrastState(false, { persist: false });
+  } else {
+    syncHighContrastToggleState();
+  }
+
+  if (highContrastToggle) {
+    highContrastToggle.addEventListener("click", () => {
+      const shouldEnable = !document.body.classList.contains("is-high-contrast");
+      setHighContrastState(shouldEnable);
+    });
+  }
+}
+
 function buildKnowledgeBase(language) {
   return knowledgeBaseDefinitions
     .map((definition) => {
@@ -726,6 +807,7 @@ function applyTranslations(language) {
   }
 
   rebuildTranslationDependentData(currentLanguage);
+  syncHighContrastToggleState();
 }
 
 function rebuildTranslationDependentData(language) {
@@ -799,6 +881,8 @@ if (languageToggle) {
     applyTranslations(nextLanguage);
   });
 }
+
+initializeHighContrastPreference();
 
 const contactFormSubmitHandler = async (event) => {
   if (!contactForm) return;
