@@ -34,8 +34,34 @@ a {
 }
 
 a:hover,
-a:focus {
+a:focus-visible {
   color: var(--color-primary);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: 0.5rem;
+  transform: translate(-50%, -150%);
+  padding: 0.75rem 1.5rem;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 14px 30px rgba(37, 41, 82, 0.25);
+  z-index: 999;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+  box-shadow: 0 18px 36px rgba(37, 41, 82, 0.3);
 }
 
 .visually-hidden {
@@ -152,12 +178,12 @@ a:focus {
 }
 
 .site-nav a:hover,
-.site-nav a:focus {
+.site-nav a:focus-visible {
   opacity: 1;
 }
 
 .site-header a:hover,
-.site-header a:focus {
+.site-header a:focus-visible {
   color: #fff;
 }
 
@@ -169,13 +195,14 @@ a:focus {
 }
 
 .site-nav__cta:hover,
-.site-nav__cta:focus {
+.site-nav__cta:focus-visible {
   border-color: rgba(255, 255, 255, 0.85);
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
 }
 
-.language-toggle {
+.language-toggle,
+.contrast-toggle {
   border: 2px solid rgba(255, 255, 255, 0.45);
   border-radius: 999px;
   background: transparent;
@@ -187,7 +214,9 @@ a:focus {
 }
 
 .language-toggle:hover,
-.language-toggle:focus {
+.language-toggle:focus-visible,
+.contrast-toggle:hover,
+.contrast-toggle:focus-visible {
   border-color: rgba(255, 255, 255, 0.85);
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
@@ -996,7 +1025,6 @@ main {
 }
 
 .chatbot__suggestions button:hover,
-.chatbot__suggestions button:focus,
 .chatbot__suggestions button:focus-visible {
   background: var(--color-primary);
   color: #fff;
@@ -1021,7 +1049,7 @@ main {
   font-family: inherit;
 }
 
-.chatbot__form input:focus {
+.chatbot__form input:focus-visible {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 4px rgba(50, 70, 148, 0.18);
   outline: none;
@@ -1184,9 +1212,9 @@ main {
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.form__field input:focus,
-.form__field select:focus,
-.form__field textarea:focus {
+.form__field input:focus-visible,
+.form__field select:focus-visible,
+.form__field textarea:focus-visible {
   outline: none;
   border-color: var(--color-primary);
   background: #fff;
@@ -1237,7 +1265,7 @@ main {
 }
 
 .button:hover,
-.button:focus {
+.button:focus-visible {
   transform: translateY(-2px);
   box-shadow: 0 14px 24px rgba(37, 41, 82, 0.18);
 }
@@ -1248,7 +1276,7 @@ main {
 }
 
 .button--primary:hover,
-.button--primary:focus {
+.button--primary:focus-visible {
   background: var(--color-primary-dark);
 }
 
@@ -1258,7 +1286,7 @@ main {
 }
 
 .button--ghost:hover,
-.button--ghost:focus {
+.button--ghost:focus-visible {
   border-color: rgba(50, 70, 148, 0.6);
   color: var(--color-primary-dark);
 }
@@ -1285,8 +1313,242 @@ main {
 }
 
 .site-footer__nav a:hover,
-.site-footer__nav a:focus {
+.site-footer__nav a:focus-visible {
   text-decoration: underline;
+}
+
+body.is-high-contrast {
+  background: #05070f;
+  color: #f4f7ff;
+  color-scheme: dark;
+}
+
+body.is-high-contrast a {
+  color: #ffd75a;
+}
+
+body.is-high-contrast a:hover,
+body.is-high-contrast a:focus-visible {
+  color: #fff1a8;
+}
+
+body.is-high-contrast :focus-visible {
+  outline-color: #ffd75a;
+}
+
+body.is-high-contrast .skip-link {
+  background: #ffd75a;
+  color: #05070f;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45);
+}
+
+body.is-high-contrast .site-header {
+  background: #02030a;
+  color: #f4f7ff;
+}
+
+body.is-high-contrast .site-header::before {
+  background: linear-gradient(115deg, rgba(2, 4, 12, 0.92), rgba(7, 12, 30, 0.85));
+}
+
+body.is-high-contrast .site-header::after {
+  background: radial-gradient(circle at 85% -10%, rgba(255, 215, 90, 0.45), transparent 55%);
+}
+
+body.is-high-contrast .site-header a:hover,
+body.is-high-contrast .site-header a:focus-visible {
+  color: #ffd75a;
+}
+
+body.is-high-contrast .site-nav__cta {
+  border-color: #ffd75a;
+  background: #ffd75a;
+  color: #05070f;
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.35);
+}
+
+body.is-high-contrast .site-nav__cta:hover,
+body.is-high-contrast .site-nav__cta:focus-visible {
+  background: transparent;
+  color: #ffd75a;
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.6);
+}
+
+body.is-high-contrast .language-toggle,
+body.is-high-contrast .contrast-toggle {
+  border-color: #ffd75a;
+  color: #ffd75a;
+}
+
+body.is-high-contrast .language-toggle:hover,
+body.is-high-contrast .language-toggle:focus-visible,
+body.is-high-contrast .contrast-toggle:hover,
+body.is-high-contrast .contrast-toggle:focus-visible {
+  background: #ffd75a;
+  color: #05070f;
+}
+
+body.is-high-contrast .hero__kicker,
+body.is-high-contrast .section-heading__eyebrow,
+body.is-high-contrast .team-card__role,
+body.is-high-contrast .service-accordion__item summary,
+body.is-high-contrast .form__field span,
+body.is-high-contrast .contact-card li span {
+  color: #ffd75a;
+}
+
+body.is-high-contrast .hero__lead,
+body.is-high-contrast .section-heading p,
+body.is-high-contrast .about-card p,
+body.is-high-contrast .team-card__bio,
+body.is-high-contrast .team-card__location,
+body.is-high-contrast .team-card__highlights,
+body.is-high-contrast .service-accordion__item ul,
+body.is-high-contrast .contact-card address,
+body.is-high-contrast .contact-card p,
+body.is-high-contrast .contact-map__address,
+body.is-high-contrast .form__disclaimer,
+body.is-high-contrast .form__status {
+  color: #e4e9ff;
+}
+
+body.is-high-contrast .about-card,
+body.is-high-contrast .team-card,
+body.is-high-contrast .contact-card,
+body.is-high-contrast .contact-map,
+body.is-high-contrast .form {
+  background: #0d1426;
+  border: 2px solid rgba(255, 215, 90, 0.65);
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.45);
+  color: #f4f7ff;
+}
+
+body.is-high-contrast .about-card h3,
+body.is-high-contrast .team-card h3,
+body.is-high-contrast .contact-card h3,
+body.is-high-contrast .contact-map__title,
+body.is-high-contrast .form h3 {
+  color: #ffd75a;
+}
+
+body.is-high-contrast .team-card::before {
+  background: rgba(255, 215, 90, 0.18);
+  opacity: 1;
+}
+
+body.is-high-contrast .team-card__tags span {
+  background: rgba(255, 215, 90, 0.12);
+  color: #ffd75a;
+}
+
+body.is-high-contrast .service-accordion__item {
+  background: #0d1426;
+  border: 2px solid rgba(255, 215, 90, 0.65);
+  box-shadow: none;
+}
+
+body.is-high-contrast .service-accordion__item[open] {
+  background: #040912;
+  box-shadow: 0 0 0 3px rgba(255, 215, 90, 0.35);
+}
+
+body.is-high-contrast .service-accordion__icon::before,
+body.is-high-contrast .service-accordion__item li::before {
+  color: #ffd75a;
+}
+
+body.is-high-contrast .button {
+  background: #ffd75a;
+  color: #05070f;
+  border-color: #ffd75a;
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.45);
+}
+
+body.is-high-contrast .button:hover,
+body.is-high-contrast .button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 215, 90, 0.6);
+}
+
+body.is-high-contrast .button--ghost {
+  background: transparent;
+  color: #ffd75a;
+  box-shadow: none;
+}
+
+body.is-high-contrast .button--ghost:hover,
+body.is-high-contrast .button--ghost:focus-visible {
+  background: #ffd75a;
+  color: #05070f;
+}
+
+body.is-high-contrast .chatbot__bubble--bot {
+  background: #111a33;
+  color: #f4f7ff;
+}
+
+body.is-high-contrast .chatbot__bubble--user {
+  background: #ffd75a;
+  color: #05070f;
+}
+
+body.is-high-contrast .chatbot__suggestions button {
+  background: transparent;
+  border: 2px solid #ffd75a;
+  color: #ffd75a;
+  box-shadow: none;
+}
+
+body.is-high-contrast .chatbot__suggestions button:hover,
+body.is-high-contrast .chatbot__suggestions button:focus-visible {
+  background: #ffd75a;
+  color: #05070f;
+  box-shadow: 0 0 0 3px rgba(255, 215, 90, 0.45);
+}
+
+body.is-high-contrast .chatbot__form input {
+  background: #0d1426;
+  border: 2px solid rgba(255, 215, 90, 0.65);
+  color: #f4f7ff;
+}
+
+body.is-high-contrast .chatbot__form input::placeholder,
+body.is-high-contrast .form__field input::placeholder,
+body.is-high-contrast .form__field textarea::placeholder {
+  color: #bcc6f9;
+}
+
+body.is-high-contrast .chatbot__form input:focus-visible,
+body.is-high-contrast .form__field input:focus-visible,
+body.is-high-contrast .form__field select:focus-visible,
+body.is-high-contrast .form__field textarea:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 215, 90, 0.45);
+  border-color: #ffd75a;
+  background: #02050f;
+}
+
+body.is-high-contrast .form__field input,
+body.is-high-contrast .form__field select,
+body.is-high-contrast .form__field textarea {
+  background: #0d1426;
+  border: 2px solid rgba(255, 215, 90, 0.65);
+  color: #f4f7ff;
+}
+
+body.is-high-contrast .form__status--success {
+  color: #6ef0b7;
+}
+
+body.is-high-contrast .form__status--error {
+  color: #ff9a9a;
+}
+
+body.is-high-contrast .site-footer {
+  background: #02030a;
+  color: #e4e9ff;
+}
+
+body.is-high-contrast .site-footer__nav a {
+  color: #ffd75a;
 }
 
 @media (max-width: 900px) {
