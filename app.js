@@ -11,6 +11,8 @@ const chatbotSuggestionButtons = document.querySelectorAll(
 );
 const languageToggle = document.getElementById("language-toggle");
 const highContrastToggle = document.getElementById("high-contrast-toggle");
+const brandLogo = document.querySelector(".brand__image");
+const faviconLink = document.querySelector('link[rel~="icon"]');
 const contactForm = document.getElementById("contact-form");
 const contactFormStatus = document.getElementById("contact-form-status");
 const CONTRAST_STORAGE_KEY = "preferredContrastMode";
@@ -638,9 +640,30 @@ function getTranslation(key, language = currentLanguage) {
   return fallbackDictionary[key] || "";
 }
 
+function updateBrandingForContrast(isHighContrast) {
+  if (brandLogo) {
+    const standardLogo = brandLogo.getAttribute("data-logo-standard");
+    const highContrastLogo = brandLogo.getAttribute("data-logo-high-contrast");
+    const nextLogo = isHighContrast ? highContrastLogo : standardLogo;
+    if (nextLogo && brandLogo.getAttribute("src") !== nextLogo) {
+      brandLogo.setAttribute("src", nextLogo);
+    }
+  }
+
+  if (faviconLink) {
+    const standardIcon = faviconLink.getAttribute("data-icon-standard");
+    const highContrastIcon = faviconLink.getAttribute("data-icon-high-contrast");
+    const nextIcon = isHighContrast ? highContrastIcon : standardIcon;
+    if (nextIcon && faviconLink.getAttribute("href") !== nextIcon) {
+      faviconLink.setAttribute("href", nextIcon);
+    }
+  }
+}
+
 function syncHighContrastToggleState() {
-  if (!highContrastToggle) return;
   const isHighContrast = document.body.classList.contains("is-high-contrast");
+  updateBrandingForContrast(isHighContrast);
+  if (!highContrastToggle) return;
   const labelKey = isHighContrast
     ? "accessibility.highContrastOnLabel"
     : "accessibility.highContrastOffLabel";
@@ -656,6 +679,7 @@ function syncHighContrastToggleState() {
 
 function setHighContrastState(isEnabled, { persist = true } = {}) {
   document.body.classList.toggle("is-high-contrast", isEnabled);
+  updateBrandingForContrast(isEnabled);
   if (persist) {
     localStorage.setItem(
       CONTRAST_STORAGE_KEY,
