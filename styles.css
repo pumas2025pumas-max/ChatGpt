@@ -1575,11 +1575,30 @@ body.is-high-contrast .chatbot__bubble--user {
   background: #ffd75a;
   color: #05070f;
 }
-f
+
+body.is-high-contrast .chatbot__widget {
+  background: linear-gradient(145deg, #050a17, #0d1426);
+  border: 2px solid rgba(255, 215, 90, 0.35);
+  box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.18);
+}
+
+body.is-high-contrast .chatbot__widget::before {
+  background: radial-gradient(circle at -20% -20%, rgba(255, 215, 90, 0.16), transparent 55%),
+    radial-gradient(circle at 120% 140%, rgba(17, 26, 51, 0.8), transparent 50%);
+  opacity: 1;
+}
+
 body.is-high-contrast .testimonial-card {
   background: #0d1426;
   border: 2px solid rgba(255, 215, 90, 0.35);
   box-shadow: 0 0 0 2px rgba(255, 215, 90, 0.18);
+}
+
+body.is-high-contrast .testimonials__grid {
+  background: linear-gradient(135deg, rgba(17, 26, 51, 0.75), rgba(5, 10, 23, 0.95));
+  border-radius: calc(var(--radius-lg) - 18px);
+  padding: clamp(1.2rem, 3vw, 1.85rem);
+  gap: clamp(1.4rem, 3vw, 2rem);
 }
 
 body.is-high-contrast .testimonial-card blockquote {
