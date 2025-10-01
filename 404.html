@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="error404.metaTitle">Estudio Meraki · Página no encontrada</title>
+    <meta
+      name="description"
+      content="No pudimos encontrar la página que buscás en Estudio Meraki. Volvé al inicio o contactanos para recibir asistencia."
+      data-i18n-attr="content:error404.metaDescription"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Work+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/LogoMeraki.png"
+      data-icon-standard="assets/LogoMeraki.png"
+      data-icon-high-contrast="assets/LogoMerakiAmarillo.png"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="error-page" data-title-key="error404.metaTitle">
+    <a class="skip-link" href="#contenido-principal" data-i18n="accessibility.skipLink">
+      Saltar al contenido principal
+    </a>
+    <header class="site-header site-header--error" id="inicio">
+      <div class="hero-media" aria-hidden="true">
+        <video class="hero-media__video" autoplay muted loop playsinline>
+          <source src="assets/VideoRascacielos.mp4" type="video/mp4" />
+          Tu navegador no soporta video HTML5.
+        </video>
+      </div>
+      <div class="site-header__inner">
+        <a class="brand" href="index.html" data-i18n-attr="aria-label:error404.homeLink" aria-label="Inicio">
+          <img
+            src="assets/LogoMeraki.png"
+            alt="Logotipo Estudio Meraki"
+            class="brand__image"
+            data-logo-standard="assets/LogoMeraki.png"
+            data-logo-high-contrast="assets/LogoMerakiAmarillo.png"
+          />
+        </a>
+        <nav class="site-nav site-nav--error" aria-label="Navegación principal" data-i18n-attr="aria-label:nav.label">
+          <a class="site-nav__cta" href="index.html" data-i18n="error404.homeLink">Inicio</a>
+          <a
+            class="site-nav__cta site-nav__cta--outline"
+            href="https://wa.me/5491162576017"
+            target="_blank"
+            rel="noopener"
+            data-i18n="error404.contactLink"
+          >
+            Contacto
+          </a>
+          <button
+            type="button"
+            class="language-toggle"
+            id="language-toggle"
+            data-i18n="language.toggle"
+            data-i18n-attr="aria-label:language.toggleLabel"
+            aria-label="Cambiar a inglés"
+          >
+            EN
+          </button>
+          <button
+            type="button"
+            class="contrast-toggle"
+            id="high-contrast-toggle"
+            aria-pressed="false"
+            aria-label="Activar modo de alto contraste"
+          >
+            <span class="contrast-toggle__icon contrast-toggle__icon--sun" aria-hidden="true">☀️</span>
+            <span class="contrast-toggle__icon contrast-toggle__icon--moon" aria-hidden="true">🌙</span>
+          </button>
+        </nav>
+      </div>
+      <div class="hero error-hero">
+        <p class="hero__kicker" data-i18n="error404.kicker">Error 404</p>
+        <h1 class="hero__title" data-i18n="error404.title">No encontramos la página que buscás</h1>
+        <p class="hero__lead" data-i18n="error404.lead">
+          Es posible que el enlace esté desactualizado o que la dirección se haya escrito con un error.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="index.html" data-i18n="error404.homeCta">Volver al inicio</a>
+          <a
+            class="button button--ghost"
+            href="mailto:ejcmeraki@gmail.com"
+            data-i18n="error404.contactCta"
+          >
+            Contactar al estudio
+          </a>
+        </div>
+      </div>
+    </header>
+    <main class="error-main" id="contenido-principal">
+      <section class="error-suggestions">
+        <div class="section-heading section-heading--center">
+          <span class="section-heading__eyebrow" data-i18n="error404.kicker">Error 404</span>
+          <h2 data-i18n="error404.suggestionsTitle">¿Qué podés hacer?</h2>
+          <p data-i18n="error404.suggestionsLead">Te dejamos algunos atajos para retomar el camino.</p>
+        </div>
+        <div class="error-suggestions__grid">
+          <article class="error-card">
+            <span class="error-card__icon" aria-hidden="true">🏠</span>
+            <h3 class="error-card__title" data-i18n="error404.option1Title">Explorar el sitio</h3>
+            <p class="error-card__body" data-i18n="error404.option1Body">
+              Visitá la <a class="error-card__link" href="index.html">página principal</a> para conocer nuestros servicios legales y contables.
+            </p>
+          </article>
+          <article class="error-card">
+            <span class="error-card__icon" aria-hidden="true">💬</span>
+            <h3 class="error-card__title" data-i18n="error404.option2Title">Contactar al equipo</h3>
+            <p class="error-card__body" data-i18n="error404.option2Body">
+              Escribinos por <a class="error-card__link" href="https://wa.me/5491162576017" target="_blank" rel="noopener">WhatsApp</a> o <a class="error-card__link" href="mailto:ejcmeraki@gmail.com">correo electrónico</a> y contanos cómo podemos ayudarte.
+            </p>
+          </article>
+          <article class="error-card">
+            <span class="error-card__icon" aria-hidden="true">↩️</span>
+            <h3 class="error-card__title" data-i18n="error404.option3Title">Volver a la página anterior</h3>
+            <p class="error-card__body" data-i18n="error404.option3Body">
+              Utilizá el botón de tu navegador para regresar y probar otro enlace o menú.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <p data-i18n="footer.copy">© <span id="year"></span> Estudio Meraki. Todos los derechos reservados.</p>
+      <nav aria-label="Navegación en el pie" class="site-footer__nav" data-i18n-attr="aria-label:footer.navLabel">
+        <a href="index.html#inicio" data-i18n="footer.home">Inicio</a>
+        <a href="index.html#sobre-el-estudio" data-i18n="footer.study">El estudio</a>
+        <a href="index.html#servicios" data-i18n="footer.services">Servicios</a>
+        <a href="index.html#metodologia" data-i18n="footer.methodology">Metodología</a>
+        <a href="index.html#testimonios" data-i18n="footer.testimonials">Testimonios</a>
+        <a href="index.html#contacto" data-i18n="footer.contact">Contacto</a>
+      </nav>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
