@@ -22,6 +22,23 @@ const STANDARD_CONTRAST_VALUE = "standard";
 const translations = {
   es: {
     "meta.title": "Estudio Meraki · Asesoramiento legal y contable",
+    "error404.metaTitle": "Estudio Meraki · Página no encontrada",
+    "error404.metaDescription": "No pudimos encontrar la página que buscás en Estudio Meraki. Volvé al inicio o contactanos para recibir asistencia.",
+    "error404.kicker": "Error 404",
+    "error404.title": "No encontramos la página que buscás",
+    "error404.lead": "Es posible que el enlace esté desactualizado o que la dirección se haya escrito con un error.",
+    "error404.homeCta": "Volver al inicio",
+    "error404.contactCta": "Contactar al estudio",
+    "error404.suggestionsTitle": "¿Qué podés hacer?",
+    "error404.suggestionsLead": "Te dejamos algunos atajos para retomar el camino.",
+    "error404.option1Title": "Explorar el sitio",
+    "error404.option1Body": "Visitá la <a class=\"error-card__link\" href=\"index.html\">página principal</a> para conocer nuestros servicios legales y contables.",
+    "error404.option2Title": "Contactar al equipo",
+    "error404.option2Body": "Escribinos por <a class=\"error-card__link\" href=\"https://wa.me/5491162576017\" target=\"_blank\" rel=\"noopener\">WhatsApp</a> o <a class=\"error-card__link\" href=\"mailto:ejcmeraki@gmail.com\">correo electrónico</a> y contanos cómo podemos ayudarte.",
+    "error404.option3Title": "Volver a la página anterior",
+    "error404.option3Body": "Utilizá el botón de tu navegador para regresar y probar otro enlace o menú.",
+    "error404.homeLink": "Inicio",
+    "error404.contactLink": "Contacto",
     "nav.study": "El estudio",
     "nav.team": "Equipo",
     "nav.services": "Servicios",
@@ -260,6 +277,23 @@ const translations = {
   },
   en: {
     "meta.title": "Meraki Firm · Legal and Accounting Advisory",
+    "error404.metaTitle": "Meraki Firm · Page not found",
+    "error404.metaDescription": "We couldn't find the page you were looking for at Meraki Firm. Head back to the homepage or contact us for assistance.",
+    "error404.kicker": "Error 404",
+    "error404.title": "We couldn’t find the page you need",
+    "error404.lead": "The link may be outdated or the address might contain a typo.",
+    "error404.homeCta": "Back to homepage",
+    "error404.contactCta": "Contact the firm",
+    "error404.suggestionsTitle": "What can you do?",
+    "error404.suggestionsLead": "Here are a few shortcuts to get you back on track.",
+    "error404.option1Title": "Explore the site",
+    "error404.option1Body": "Visit the <a class=\"error-card__link\" href=\"index.html\">homepage</a> to review our legal and accounting services.",
+    "error404.option2Title": "Reach out to the team",
+    "error404.option2Body": "Message us on <a class=\"error-card__link\" href=\"https://wa.me/5491162576017\" target=\"_blank\" rel=\"noopener\">WhatsApp</a> or <a class=\"error-card__link\" href=\"mailto:ejcmeraki@gmail.com\">email</a> and tell us how we can help.",
+    "error404.option3Title": "Go back to the previous page",
+    "error404.option3Body": "Use your browser’s back button to return and try another link or menu option.",
+    "error404.homeLink": "Home",
+    "error404.contactLink": "Contact",
     "nav.study": "The firm",
     "nav.team": "Team",
     "nav.services": "Services",
@@ -776,7 +810,8 @@ function applyTranslations(language) {
   document.documentElement.lang = currentLanguage;
   document.body.dataset.language = currentLanguage;
 
-  const title = getTranslation("meta.title");
+  const titleKey = document.body?.dataset?.titleKey || "meta.title";
+  const title = getTranslation(titleKey);
   if (title) {
     document.title = title;
   }
