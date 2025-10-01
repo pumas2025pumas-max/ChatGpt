@@ -1140,6 +1140,19 @@ main {
   gap: 0.35rem;
 }
 
+.contact-card__phone-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.contact-card__phone-type {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
 .contact-card a {
   text-decoration: none;
   font-weight: 500;
